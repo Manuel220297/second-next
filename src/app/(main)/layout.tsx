@@ -27,11 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <div className={`${geistSans.variable} ${geistMono.variable} antialiased flex`}>
-      <AppSidebar></AppSidebar>
-      <main className='w-full'>
-        <AppNavbar></AppNavbar>
-        {children}
-      </main>
+      <SidebarProvider>
+        <AppSidebar></AppSidebar>
+        <main className='w-full'>
+          <AppNavbar></AppNavbar>
+          {children}
+        </main>
+      </SidebarProvider>
     </div>
   );
 }

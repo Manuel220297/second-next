@@ -19,13 +19,14 @@ import { LogOut, Moon, Settings2, SquareMenu, User } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import ModeToggle from './ModeToggle';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 type Props = {};
 
 const AppNavbar = ({}: Props) => {
   return (
     <nav className='p-4 flex items-center  justify-between'>
-      collapsebutton
+      <SidebarTrigger></SidebarTrigger>
       <div className='flex items-center gap-4'>
         <Link href={'/'}>Dashboard</Link>
         <ModeToggle></ModeToggle>
