@@ -43,9 +43,12 @@ html body[data-scroll-locked] {
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --breakpoint-md: 51.5rem;
+  --breakpoint-lg: 85.5rem;
+  --breakpoint-xl: 100rem;
 }
 
 :root {

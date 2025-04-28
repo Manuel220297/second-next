@@ -10,7 +10,7 @@ const AppSidebar = () => {
   return (
     <Sidebar collapsible='icon'>
       <SidebarContentHeader></SidebarContentHeader>
-      <hr />
+      <hr className='' />
       <SidebarContent1 />
       <SidebarContentFooter />
     </Sidebar>

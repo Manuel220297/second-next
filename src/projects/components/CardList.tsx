@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardTitle } from '@/components/ui/card';
 import { count } from 'console';
 import Image from 'next/image';
@@ -57,17 +58,20 @@ const CardList = ({ title }: Props) => {
       <div className='flex flex-col gap-2'>
         {lists.map((list) => {
           return (
-            <Card key={list.id} className='flex flex-row items-center px-4'>
-              <div className='rounded-md'>
-                <Image className='rounded-full' src={list.image} alt='image' width={32} height={32} />
+            <Card key={list.id} className='flex flex-row items-center px-4 gap-4'>
+              <div className='rounded-md min-w-8'>
+                <Image className='rounded-md size-6 md:size-8' src={list.image} alt='image' width={32} height={32} />
               </div>
-              <CardContent>
-                <CardTitle className='text-lg'>{list.name}</CardTitle>
-                <p className='text-sm text-muted-foreground'>
-                  {list.title}, {list.badge}
-                </p>
+              <CardContent className='p-0'>
+                <CardTitle className='md:text-lg p-0'>{list.name}</CardTitle>
+
+                <Badge variant={'secondary'} className='p-0'>
+                  <p className='text-xs p-0.5 md:text-sm text-muted-foreground'>
+                    {list.title}, {list.badge}
+                  </p>
+                </Badge>
               </CardContent>
-              <CardFooter className='ml-auto'>{list.count >= 1000 ? list.count / 1000 + 'K' : list.count}</CardFooter>
+              <CardFooter className='ml-auto p-0'>{list.count >= 1000 ? (list.count / 1000).toFixed(1) + 'K' : list.count}</CardFooter>
             </Card>
           );
         })}
