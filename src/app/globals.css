@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/fonts/MyCustomFont-Regular.woff2') format('woff2'), url('/fonts/MyCustomFont-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 html body[data-scroll-locked] {
