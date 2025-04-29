@@ -40,8 +40,10 @@ const AppNavbar = ({}: Props) => {
           <DropdownMenuContent className='p-2'>
             <DropdownMenuLabel className='p-2'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className='p-2'>
-              <User></User> Profile
+            <DropdownMenuItem className='p-2' asChild>
+              <Link href={'/users/page'}>
+                <User /> Profile
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className='p-2'>
               <Settings2></Settings2> Settings
