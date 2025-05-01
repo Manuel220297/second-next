@@ -48,8 +48,10 @@ const AppNavbar = ({}: Props) => {
             <DropdownMenuItem className='p-2'>
               <Settings2></Settings2> Settings
             </DropdownMenuItem>
-            <DropdownMenuItem className='p-2' variant='destructive'>
+            <DropdownMenuItem className='p-2' variant='destructive' asChild>
+              <Link href={'/login'}>
               <LogOut></LogOut>Logout
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

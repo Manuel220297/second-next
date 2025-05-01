@@ -1,8 +1,11 @@
 import { AutoBreadcrumb } from '@/projects/components/AutoBreadcrumb';
 import CardList from '@/projects/components/CardList';
 import EditUserComponent from '@/projects/components/EditUserComponent';
+import users from '@/data/users.json';
 
-const UserPage = () => {
+const UserPage = ({ params }: { params: { id: string } }) => {
+  let userId = parseInt(params.id);
+  let userData = users.find((u) => u.id === userId);
   return (
     <div className='mx-4'>
       <AutoBreadcrumb className='hidden md:block' />
@@ -10,7 +13,7 @@ const UserPage = () => {
         <div className='bg-primary-foreground p-4 rounded-lg'>
           <CardList title='Ack'></CardList>
         </div>
-        <EditUserComponent></EditUserComponent>
+        <EditUserComponent user={userData}></EditUserComponent>
       </div>
     </div>
   );

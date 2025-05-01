@@ -1,16 +1,22 @@
 import { AutoBreadcrumb } from '@/projects/components/AutoBreadcrumb';
 import CardList from '@/projects/components/CardList';
+import { DataTable } from './data-table';
+import { Users, columns } from './columns';
+import users from '@/data/users.json';
 
-const UsersPage = () => {
+const getUsers = async (): Promise<Users[]> => {
+  return users;
+};
+const UsersPage = async () => {
+  const users = await getUsers();
+
   return (
     <div className='mx-4'>
       <AutoBreadcrumb className='hidden md:block' />
-      <div className='grid grid-cols-2 grid-rows-2 gap-4'>
-        <div className=''>
-          <CardList title='Ack'></CardList>
-        </div>
-        <div className=''>Ack</div>
+      <div className='mb-8 px-4 py-2 bg-secondary rounded-md'>
+        <h1 className='font-semibold'>All Users</h1>
       </div>
+      <DataTable columns={columns} data={users}></DataTable>
     </div>
   );
 };
