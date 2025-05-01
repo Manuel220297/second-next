@@ -1,6 +1,8 @@
 'use server';
 import { Client, Account } from 'node-appwrite';
 import { cookies } from 'next/headers';
+import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function createSessionClient() {
   const client = new Client().setEndpoint('https://cloud.appwrite.io/v1').setProject('student-project');
