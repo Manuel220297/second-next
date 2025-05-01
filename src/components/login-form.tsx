@@ -36,7 +36,11 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
     if (res.ok) {
       router.push('/');
     } else {
-      alert(`Login failed: ${data.error}`);
+      console.log(`Login failed: ${data.error}`);
+      form.setError('email', {
+        type: 'manual',
+        message: 'Invalid Email or password ',
+      });
     }
   }
 
