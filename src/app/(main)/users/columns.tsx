@@ -15,7 +15,7 @@ export type Users = {
   email: string;
   phone: string;
   location: string;
-  role: string;
+  payment: string;
 };
 
 export const columns: ColumnDef<Users>[] = [
@@ -46,9 +46,9 @@ export const columns: ColumnDef<Users>[] = [
     },
   },
   {
-    accessorKey: 'role',
-    header: 'Role',
-    cell: ({ row }) => <div className='p-1 bg-amber-500/33 rounded-md w-max text-xs font-light'>{row.getValue('role')}</div>,
+    accessorKey: 'payment',
+    header: 'Payment',
+    cell: ({ row }) => <div className='p-1 bg-amber-500/33 rounded-md w-max text-xs font-light'>{row.getValue('payment')}</div>,
   },
   {
     accessorKey: 'location',
@@ -58,6 +58,7 @@ export const columns: ColumnDef<Users>[] = [
     accessorKey: 'phone',
     header: 'Phone',
   },
+
   {
     id: 'actions',
     enableHiding: false,
