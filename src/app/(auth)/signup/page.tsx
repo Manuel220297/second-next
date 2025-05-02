@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/server/appwrite';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getLoggedInUser } from '@/lib/server/appwrite';
+import { signUpWithGoogle } from '@/lib/server/oauth';
 
 async function signUpWithEmail(formData: FormData) {
   'use server';
@@ -39,6 +40,9 @@ export default async function SignUpPage() {
         <input id='name' name='name' placeholder='Name' type='text' />
         <button type='submit'>Sign up</button>
       </form>
+      <a href='/api/oauth'>
+        <button type='button'>Sign up with Google</button>
+      </a>
     </>
   );
 }

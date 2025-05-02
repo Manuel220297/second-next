@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { loginWithGoogle } from '@/lib/client/appwrite';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid Email' }),
@@ -45,14 +46,14 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('flex flex-col gap-6', className)} {...props}>
-        <div className='flex flex-col items-center gap-2 text-center'>
-          <h1 className='text-2xl font-bold'>Login to your account</h1>
-          <p className='text-muted-foreground text-sm text-balance'>Enter your email below to login to your account</p>
-        </div>
+    <div className={cn('flex flex-col gap-6', className)}>
+      <div className='flex flex-col items-center gap-2 text-center'>
+        <h1 className='text-2xl font-bold'>Login to your account</h1>
+        <p className='text-muted-foreground text-sm text-balance'>Enter your email below to login to your account</p>
+      </div>
 
-        <div className='grid gap-6'>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='grid gap-6' {...props}>
           <FormField
             control={form.control}
             name='email'
@@ -77,9 +78,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
                     Forgot your password?
                   </a>
                 </FormLabel>
-
                 <FormControl>
-                  <Input type='password' placeholder='password' {...field} />
+                  <Input type='password' placeholder='Password' {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -88,25 +88,30 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
           <Button type='submit' className='w-full'>
             Login
           </Button>
-          <div className='after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t'>
-            <span className='bg-background text-muted-foreground relative z-10 px-2'>Or continue with</span>
-          </div>
-          <Button variant='outline' className='w-full'>
-            <FaGithub />
-            Login with GitHub
-          </Button>
-          <Button variant='outline' className='w-full'>
-            <FaGoogle />
-            Login with Google
-          </Button>
+        </form>
+      </Form>
+
+      {/* Social login buttons below the form */}
+      <div className='grid gap-4'>
+        <div className='after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t'>
+          <span className='bg-background text-muted-foreground relative z-10 px-2'>Or continue with</span>
         </div>
-        <div className='text-center text-sm'>
-          Don&apos;t have an account?
-          <a href='#' className='underline underline-offset-4'>
-            Sign up
-          </a>
-        </div>
-      </form>
-    </Form>
+        <Button variant='outline' className='w-full'>
+          <FaGithub />
+          Login with GitHub
+        </Button>
+        <Button onClick={loginWithGoogle} variant='outline' className='w-full'>
+          <FaGoogle />
+          Login with Google
+        </Button>
+      </div>
+
+      <div className='text-center text-sm'>
+        Don&apos;t have an account?
+        <a href='#' className='underline underline-offset-4'>
+          Sign up
+        </a>
+      </div>
+    </div>
   );
 }
