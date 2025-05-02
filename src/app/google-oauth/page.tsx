@@ -1,17 +1,26 @@
-// app/oauth/page.tsx
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function OAuthCallbackPage() {
+export default function OAuthPage() {
   const router = useRouter();
 
   useEffect(() => {
     const finalizeLogin = async () => {
-      const res = await fetch('/api/googlesuccess');
+      const url = new URL(window.location.href);
+      const userId = url.searchParams.get('userId');
+      const secret = url.searchParams.get('secret');
+      console.log('userID:', userId);
+      console.log('Secret:', secret);
+
+      const res = await fetch('/api/googlesuccess', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, secret }),
+      });
       if (res.ok) {
-        router.replace('/dashboard');
+        router.replace('/');
       } else {
         router.replace('/signup');
       }

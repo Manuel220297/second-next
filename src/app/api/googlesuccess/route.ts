@@ -1,31 +1,28 @@
-import { createAdminClient, createSessionClient } from '@/lib/server/appwrite';
-import { OAuthProvider } from 'node-appwrite';
+import { createAdminClient } from '@/lib/server/appwrite';
 import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
-  const { account } = await createAdminClient();
-  console.log(account);
-  // try {
-  const session = await account.createOAuth2Token(OAuthProvider.Google, 'http://localhost:3000', 'http://localhost:3000/fail');
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    console.log('Body Secret: ', body.secret);
+    console.log('Body UserID: ', body.userId);
 
-  if (!session) {
-    console.log('Session not found');
+    const { account } = await createAdminClient();
+    const session = await account.createSession(body.userId!, body.secret!);
+
+    const cookieStore = cookies();
+    (await cookieStore).set('myproject-session', session.secret, {
+      path: '/',
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: true,
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.log(err);
+    return new NextResponse(`Unauthorized`, { status: 401 });
   }
-  console.log(session);
-
-  const cookieStore = cookies();
-  (await cookieStore).set('myproject-session', session, {
-    path: '/',
-    httpOnly: true,
-    sameSite: 'strict',
-    secure: true,
-    maxAge: 60 * 60 * 24 * 7,
-  });
-
-  return NextResponse.json({ success: true });
-  // } catch (err) {
-  //   console.log(err);
-  //   return new NextResponse(`Unauthorized`, { status: 401 });
-  // }
 }

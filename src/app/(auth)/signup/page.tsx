@@ -30,7 +30,7 @@ async function signUpWithEmail(formData: FormData) {
 
 export default async function SignUpPage() {
   const user = await getLoggedInUser();
-  if (user) redirect('/dashboard');
+  if (user) redirect('/');
 
   return (
     <>

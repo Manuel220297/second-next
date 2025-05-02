@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { loginWithGoogle } from '@/lib/client/appwrite';
+import Link from 'next/link';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid Email' }),
@@ -100,10 +101,12 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
           <FaGithub />
           Login with GitHub
         </Button>
-        <Button onClick={loginWithGoogle} variant='outline' className='w-full'>
-          <FaGoogle />
-          Login with Google
-        </Button>
+        <a href={'/api/oauth'}>
+          <Button variant='outline' className='w-full'>
+            <FaGoogle />
+            Login with Google
+          </Button>
+        </a>
       </div>
 
       <div className='text-center text-sm'>
