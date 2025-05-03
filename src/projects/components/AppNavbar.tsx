@@ -1,3 +1,4 @@
+'use server';
 import { AvatarFallback, AvatarImage, Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,15 +21,26 @@ import Link from 'next/link';
 import React from 'react';
 import ModeToggle from './ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import getUsername from '@/lib/actions/getUsername';
+import { cookies } from 'next/headers';
 
-type Props = {};
+const getName = async () => {
+  const session = await cookies();
+  const cookieSession = await session.get('myproject-session');
+  if (!cookieSession) {
+    return 'No session';
+  }
+  const username = getUsername(cookieSession?.value);
+  return username;
+};
 
-const AppNavbar = ({}: Props) => {
+const AppNavbar = async () => {
+  const username = await getName();
   return (
     <nav className='p-4 flex items-center  justify-between'>
       <SidebarTrigger></SidebarTrigger>
       <div className='flex items-center gap-4'>
-        <Link href={'/'}>Dashboard</Link>
+        <Link href={'/'}>Hello {username}</Link>
         <ModeToggle></ModeToggle>
         <DropdownMenu>
           <DropdownMenuTrigger>

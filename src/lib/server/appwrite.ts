@@ -1,18 +1,19 @@
 'use server';
-import { Client, Account } from 'node-appwrite';
+import { Client, Account, Users } from 'node-appwrite';
 import { cookies } from 'next/headers';
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { NextRequest, NextResponse } from 'next/server';
+import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 
-export async function createSessionClient() {
+export async function createSessionClient(session: string) {
   const client = new Client().setEndpoint('https://fra.cloud.appwrite.io/v1').setProject('student-project');
 
-  const session = (await cookies()).get('myproject-session');
-  if (!session || !session.value) {
+  // const session = (await cookies()).get('myproject-session');
+  if (!session) {
     throw new Error('No session');
   }
 
-  client.setSession(session.value);
+  client.setSession(session);
 
   return {
     get account() {
@@ -38,7 +39,12 @@ export async function createAdminClient() {
 
 export async function getLoggedInUser() {
   try {
-    const { account } = await createSessionClient();
+    const session = (await cookies()).get('myproject-session');
+    if (!session) {
+      throw new Error('No session');
+    }
+
+    const { account } = await createSessionClient(session?.value);
     return await account.get();
   } catch (error) {
     return null;

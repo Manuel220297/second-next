@@ -6,14 +6,12 @@ import { getLoggedInUser } from './lib/server/appwrite';
 export async function middleware(request: NextRequest) {
   const user = await getLoggedInUser();
 
-  console.log(user);
+  console.log('User Existing: ', user);
   if (!user) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
   // console.log(user);
   console.log('Middleware test');
-  // return NextResponse.next();
-  // return NextResponse.redirect(new URL('/home', request.url))
 }
 
 // See "Matching Paths" below to learn more
