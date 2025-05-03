@@ -1,4 +1,5 @@
 'use client';
+'use no memo';
 
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, getFilteredRowModel, ColumnFiltersState, SortingState, useReactTable, VisibilityState } from '@tanstack/react-table';
 
