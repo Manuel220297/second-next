@@ -29,8 +29,8 @@ async function signUpWithEmail(formData: FormData) {
 }
 
 export default async function SignUpPage() {
-  const user = await getLoggedInUser();
-  if (user) redirect('/');
+  const { isAuthenticated } = await getLoggedInUser();
+  if (isAuthenticated) redirect('/');
 
   return (
     <>

@@ -3,10 +3,10 @@ import { getLoggedInUser } from '@/lib/server/appwrite';
 import { redirect } from 'next/navigation';
 
 export default async function Testlogin() {
-  const user = await getLoggedInUser();
+  const { isAuthenticated } = await getLoggedInUser();
 
-  console.log(user);
-  if (!user) redirect('/login');
-  console.log(user);
+  console.log(isAuthenticated);
+  if (!isAuthenticated) redirect('/login');
+  console.log(isAuthenticated);
   redirect('/dashboard');
 }

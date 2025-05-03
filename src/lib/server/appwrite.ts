@@ -41,12 +41,26 @@ export async function getLoggedInUser() {
   try {
     const session = (await cookies()).get('myproject-session');
     if (!session) {
-      throw new Error('No session');
+      return {
+        isAuthenticated: false,
+      };
     }
 
     const { account } = await createSessionClient(session?.value);
-    return await account.get();
+    const user = await account.get();
+
+    return {
+      isAuthenticated: true,
+      user: {
+        id: user.$id,
+        name: user.name,
+        email: user.email,
+        label: user.labels,
+      },
+    };
   } catch (error) {
-    return null;
+    return {
+      isAuthenticated: false,
+    };
   }
 }
