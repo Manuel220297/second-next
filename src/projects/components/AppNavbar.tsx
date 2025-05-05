@@ -38,8 +38,6 @@ const getName = async () => {
 const AppNavbar = async () => {
   const { user } = await getLoggedInUser();
 
-  console.log('The user ID', user?.id);
-
   const username = await getName();
   return (
     <nav className='p-4 flex items-center  justify-between'>
@@ -63,7 +61,7 @@ const AppNavbar = async () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className='p-2'>
-              <Settings2></Settings2> Settings
+              <Settings2></Settings2> Edit Profile
             </DropdownMenuItem>
             <DropdownMenuItem className='p-2' variant='destructive' asChild>
               <Link href={'/logout'}>

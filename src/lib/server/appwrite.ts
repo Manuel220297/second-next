@@ -1,13 +1,9 @@
 'use server';
 import { Client, Account, Users, Databases } from 'node-appwrite';
 import { cookies } from 'next/headers';
-import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
-import { NextRequest, NextResponse } from 'next/server';
-import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
-import { Database } from 'lucide-react';
 
 export async function createSessionClient(session: string) {
-  const client = new Client().setEndpoint('https://fra.cloud.appwrite.io/v1').setProject('student-project');
+  const client = new Client().setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT).setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT);
 
   // const session = (await cookies()).get('myproject-session');
   if (!session) {
@@ -24,12 +20,7 @@ export async function createSessionClient(session: string) {
 }
 
 export async function createAdminClient() {
-  const client = new Client()
-    .setEndpoint('https://fra.cloud.appwrite.io/v1')
-    .setProject('student-project')
-    .setKey(
-      'standard_be2ff0aded485a7c66e93ffc7291d4182e792a6f8ee0d228e6590bc273c32c37bcc0022bdf0b1b969118ddc91296b40cbf89bcb00fbab05d080ca9a0fa091a3967c3f4296003ec02e1aaa52aa3882aec7b656e738f21a39690d446245c4da5fe78171a7649577927460300d6d1462250deecf8f2c6a146bcb6626fb6a6e36726'
-    );
+  const client = new Client().setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT).setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT).setKey(process.env.NEXT_PUBLIC_APPWRITE_KEY);
 
   return {
     get account() {
