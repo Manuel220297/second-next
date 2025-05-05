@@ -56,7 +56,7 @@ const AppNavbar = async () => {
             <DropdownMenuLabel className='p-2'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className='p-2' asChild>
-              <Link href={`/users/${user?.id}`}>
+              <Link href={`/${user?.id}`}>
                 <User /> Profile
               </Link>
             </DropdownMenuItem>
