@@ -1,0 +1,378 @@
+{
+  "subjects": [
+    {
+      "name": "Web Systems",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 85,
+            "midterm": 88,
+            "prefinal": 90,
+            "final": 92
+          },
+          "avatar": ""
+        },
+        {
+          "id": "2",
+          "firstName": "Bob",
+          "surname": "Smith",
+          "email": "bob@example.com",
+          "grades": {
+            "prelim": 78,
+            "midterm": 80,
+            "prefinal": 82,
+            "final": 85
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "Introduction to HTML",
+          "content": "Let's start with the basics of HTML. Please review the attached document and image.",
+          "timestamp": "2025-05-04T08:30:00Z",
+          "images": [
+            {
+              "url": "https://example.com/images/html-intro.png",
+              "alt": "HTML structure example"
+            }
+          ],
+          "attachments": [
+            {
+              "filename": "HTML_Basics.pdf",
+              "url": "https://example.com/files/HTML_Basics.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Networks",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 88,
+            "midterm": 89,
+            "prefinal": 91,
+            "final": 93
+          },
+          "avatar": ""
+        },
+        {
+          "id": "4",
+          "firstName": "Dana",
+          "surname": "Lee",
+          "email": "dana@example.com",
+          "grades": {
+            "prelim": 80,
+            "midterm": 83,
+            "prefinal": 85,
+            "final": 88
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "OSI Model",
+          "content": "We will discuss each layer of the OSI model.",
+          "timestamp": "2025-05-03T09:00:00Z",
+          "attachments": [
+            {
+              "filename": "OSI_Model_Diagram.pdf",
+              "url": "https://example.com/files/OSI_Model_Diagram.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Platform Integration",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 81,
+            "midterm": 83,
+            "prefinal": 88,
+            "final": 90
+          },
+          "avatar": ""
+        },
+        {
+          "id": "6",
+          "firstName": "Frank",
+          "surname": "Wright",
+          "email": "frank@example.com",
+          "grades": {
+            "prelim": 76,
+            "midterm": 78,
+            "prefinal": 80,
+            "final": 82
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "API Basics",
+          "content": "Introduction to RESTful APIs and how to consume them.",
+          "timestamp": "2025-05-02T13:00:00Z",
+          "attachments": [
+            {
+              "filename": "API_Overview.pdf",
+              "url": "https://example.com/files/API_Overview.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Multimedia",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 90,
+            "midterm": 92,
+            "prefinal": 94,
+            "final": 96
+          },
+          "avatar": ""
+        },
+        {
+          "id": "8",
+          "firstName": "Henry",
+          "surname": "Ford",
+          "email": "henry@example.com",
+          "grades": {
+            "prelim": 75,
+            "midterm": 78,
+            "prefinal": 80,
+            "final": 82
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "Video Editing Basics",
+          "content": "We will explore Premiere Pro and basic editing principles.",
+          "timestamp": "2025-05-01T10:00:00Z",
+          "attachments": [
+            {
+              "filename": "Video_Editing_Intro.pdf",
+              "url": "https://example.com/files/Video_Editing_Intro.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Integrated Backend Programming",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 85,
+            "midterm": 86,
+            "prefinal": 89,
+            "final": 91
+          },
+          "avatar": ""
+        },
+        {
+          "id": "10",
+          "firstName": "Julia",
+          "surname": "Nguyen",
+          "email": "julia@example.com",
+          "grades": {
+            "prelim": 88,
+            "midterm": 90,
+            "prefinal": 91,
+            "final": 94
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "Node.js & Express Overview",
+          "content": "We'll build RESTful services using Express.",
+          "timestamp": "2025-05-01T11:00:00Z",
+          "attachments": [
+            {
+              "filename": "Express_Guide.pdf",
+              "url": "https://example.com/files/Express_Guide.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cybersecurity",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 82,
+            "midterm": 84,
+            "prefinal": 86,
+            "final": 88
+          },
+          "avatar": ""
+        },
+        {
+          "id": "12",
+          "firstName": "Lina",
+          "surname": "Zhao",
+          "email": "lina@example.com",
+          "grades": {
+            "prelim": 91,
+            "midterm": 93,
+            "prefinal": 94,
+            "final": 95
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "Introduction to Ethical Hacking",
+          "content": "Understanding vulnerabilities and penetration testing.",
+          "timestamp": "2025-04-30T14:00:00Z",
+          "attachments": [
+            {
+              "filename": "Ethical_Hacking_Intro.pdf",
+              "url": "https://example.com/files/Ethical_Hacking_Intro.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data Structures",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 84,
+            "midterm": 86,
+            "prefinal": 88,
+            "final": 89
+          },
+          "avatar": ""
+        },
+        {
+          "id": "14",
+          "firstName": "Nate",
+          "surname": "Diaz",
+          "email": "nate@example.com",
+          "grades": {
+            "prelim": 77,
+            "midterm": 79,
+            "prefinal": 81,
+            "final": 83
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "Linked Lists and Trees",
+          "content": "Exploring dynamic data structures.",
+          "timestamp": "2025-04-29T12:00:00Z",
+          "attachments": [
+            {
+              "filename": "DataStructures_LinkedLists.pdf",
+              "url": "https://example.com/files/DataStructures_LinkedLists.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cloud Computing",
+      "students": [
+        {
+          "id": "1",
+          "firstName": "Canog",
+          "surname": "Manuel",
+          "email": "1-220297@asiatech.edu.ph",
+          "grades": {
+            "prelim": 87,
+            "midterm": 89,
+            "prefinal": 91,
+            "final": 93
+          },
+          "avatar": ""
+        },
+        {
+          "id": "16",
+          "firstName": "Paula",
+          "surname": "Chen",
+          "email": "paula@example.com",
+          "grades": {
+            "prelim": 90,
+            "midterm": 92,
+            "prefinal": 94,
+            "final": 96
+          },
+          "avatar": ""
+        }
+      ],
+      "posts": [
+        {
+          "id": "1",
+          "title": "AWS vs Azure",
+          "content": "Compare cloud service providers.",
+          "timestamp": "2025-04-28T16:00:00Z",
+          "attachments": [
+            {
+              "filename": "Cloud_Comparison.pdf",
+              "url": "https://example.com/files/Cloud_Comparison.pdf",
+              "type": "pdf"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

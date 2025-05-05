@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -11,11 +12,9 @@ const SidebarContentHeader = () => {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href={'/'}>
-                <Avatar className='size-6'>
-                  <AvatarImage src='https://github.com/shadcn.png' />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                Lorem Ipsum
+                <Image className='invert dark:invert-0 mx-2' width={20} height={20} src={'/vercel.svg'} alt='nextLogo'></Image>
+
+                <Image className='dark:invert' width={80} height={80} src={'/next.svg'} alt='nextLogo'></Image>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

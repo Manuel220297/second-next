@@ -1,4 +1,3 @@
-import { AutoBreadcrumb } from '@/projects/components/AutoBreadcrumb';
 import CardList from '@/projects/components/CardList';
 import { DataTable } from './data-table';
 import { Users, columns } from './columns';
@@ -12,7 +11,6 @@ const UsersPage = async () => {
 
   return (
     <div className='mx-4'>
-      <AutoBreadcrumb className='hidden md:block' />
       <div className='mb-8 px-4 py-2 bg-secondary rounded-md'>
         <h1 className='font-semibold'>All Users</h1>
       </div>

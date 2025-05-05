@@ -1,9 +1,10 @@
 'use server';
-import { Client, Account, Users } from 'node-appwrite';
+import { Client, Account, Users, Databases } from 'node-appwrite';
 import { cookies } from 'next/headers';
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { NextRequest, NextResponse } from 'next/server';
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
+import { Database } from 'lucide-react';
 
 export async function createSessionClient(session: string) {
   const client = new Client().setEndpoint('https://fra.cloud.appwrite.io/v1').setProject('student-project');
@@ -33,6 +34,9 @@ export async function createAdminClient() {
   return {
     get account() {
       return new Account(client);
+    },
+    get databases() {
+      return new Databases(client);
     },
   };
 }

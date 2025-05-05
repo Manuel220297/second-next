@@ -4,30 +4,31 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import AppSidebar from '@/projects/components/AppSidebar';
 import AppNavbar from '@/projects/components/AppNavbar';
 import localFont from 'next/font/local';
+import { AutoBreadcrumb } from '@/projects/components/AutoBreadcrumb';
 
-const geistMono = localFont({
-  src: [
-    {
-      path: '../../fonts/GeistMono[wght].ttf',
-      weight: '100 900', // Adjust based on your font's supported weights
-      style: 'normal',
-    },
-  ],
-  variable: '--font-geist-mono',
-  display: 'swap',
-});
+// const geistMono = localFont({
+//   src: [
+//     {
+//       path: '../../fonts/GeistMono[wght].ttf',
+//       weight: '100 900', // Adjust based on your font's supported weights
+//       style: 'normal',
+//     },
+//   ],
+//   variable: '--font-geist-mono',
+//   display: 'swap',
+// });
 
-const geistSans = localFont({
-  src: [
-    {
-      path: '../../fonts/Geist[wght].ttf',
-      weight: '100 750 900',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-geist',
-  display: 'swap',
-});
+// const geistSans = localFont({
+//   src: [
+//     {
+//       path: '../../fonts/Geist[wght].ttf',
+//       weight: '100 750 900',
+//       style: 'normal',
+//     },
+//   ],
+//   variable: '--font-geist',
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   title: 'Testing Lang',
@@ -40,11 +41,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} antialiased flex`}>
+    <div className={` antialiased flex`}>
       <SidebarProvider>
         <AppSidebar></AppSidebar>
         <main className='w-full'>
           <AppNavbar></AppNavbar>
+          <AutoBreadcrumb className='px-4 hidden md:block' />
+
           {children}
         </main>
       </SidebarProvider>
