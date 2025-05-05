@@ -1,7 +1,7 @@
 import { createAdminClient } from '@/lib/server/appwrite';
 import React from 'react';
 
-interface Grade {
+export interface Grade {
   $id: string;
   prelim: number;
   midterm: number;
@@ -9,7 +9,12 @@ interface Grade {
   final: number;
   students: {
     userId: string;
-    name: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    location: string;
+    phone: string;
+    isPayed: boolean;
   };
   subjects: {
     name: string;
@@ -28,12 +33,14 @@ export default async function Page({ params }: { params: { id: string } }) {
       'student-project', // Database ID
       'gradeCollection' // Grades Collection ID
     );
-    console.log(res.documents[0].students);
+    console.log(res.documents[0].students.userId);
+    console.log(res.documents[0].students.isPayed);
+    console.log(userId);
 
     const allGrades = res.documents as unknown as Grade[];
 
     // Filter on the server side
-    filteredGrades = allGrades.filter((doc) => doc.students?.userId === userId);
+    filteredGrades = allGrades.filter((doc) => doc.students?.userId == userId);
   } catch (error) {
     console.error('Error fetching grades:', error);
   }

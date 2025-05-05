@@ -16,13 +16,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { LogOut, Moon, Settings2, SquareMenu, User } from 'lucide-react';
+import { Bell, LogOut, Moon, Settings2, SquareMenu, User } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import ModeToggle from './ModeToggle';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import getUsername from '@/lib/actions/getUsername';
 import { cookies } from 'next/headers';
+import { createAdminClient, getLoggedInUser } from '@/lib/server/appwrite';
 
 const getName = async () => {
   const session = await cookies();
@@ -35,6 +36,10 @@ const getName = async () => {
 };
 
 const AppNavbar = async () => {
+  const { user } = await getLoggedInUser();
+
+  console.log('The user ID', user?.id);
+
   const username = await getName();
   return (
     <nav className='p-4 flex items-center  justify-between'>
@@ -53,7 +58,7 @@ const AppNavbar = async () => {
             <DropdownMenuLabel className='p-2'>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className='p-2' asChild>
-              <Link href={'/users/page'}>
+              <Link href={`/users/${user?.id}`}>
                 <User /> Profile
               </Link>
             </DropdownMenuItem>
@@ -71,16 +76,16 @@ const AppNavbar = async () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant={'outline'}>
-              <SquareMenu></SquareMenu>
+              <Bell></Bell>
               <span className='sr-only'>Open Menu</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>Notification</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Menu 1</DropdownMenuItem>
-            <DropdownMenuItem>Menu 2</DropdownMenuItem>
-            <DropdownMenuItem>Menu 3</DropdownMenuItem>
+            <DropdownMenuItem>Example Notification 1</DropdownMenuItem>
+            <DropdownMenuItem>Example Notification 2</DropdownMenuItem>
+            <DropdownMenuItem>Example Notification 3</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

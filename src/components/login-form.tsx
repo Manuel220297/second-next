@@ -111,9 +111,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
 
       <div className='text-center text-sm'>
         Don&apos;t have an account?
-        <a href='#' className='underline underline-offset-4'>
+        <Link href='/signup' className='underline underline-offset-4'>
           Sign up
-        </a>
+        </Link>
       </div>
     </div>
   );

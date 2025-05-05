@@ -1,16 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { Grade } from '@/lib/actions/getGrades';
 import Image from 'next/image';
 import React from 'react';
 
-type Props = {
-  user?: {
-    name?: string;
-  };
-  avatar?: string;
-};
-
-const UserHeader = async ({ user, avatar }: Props) => {
+const UserHeader = async ({ first_name }: { first_name?: string }) => {
   const imageCount = 2; //
   const randomIndex = Math.floor(Math.random() * imageCount);
   const imgSrc = `/images/profile/icon${randomIndex}.webp`;
@@ -28,7 +22,7 @@ const UserHeader = async ({ user, avatar }: Props) => {
             <AvatarFallback>YU</AvatarFallback>
           </Avatar>
           <div className='flex flex-col ml-62 py-4'>
-            <h1 className='text-primary text-2xl mdl:text-4xl font-bold'>{user?.name || 'Canog Manuel'}</h1>
+            <h1 className='text-primary text-2xl mdl:text-4xl font-bold'>{first_name || 'Canog Manuel'}</h1>
             <p className='text-foreground'> Bachelor of Information Technology</p>
           </div>
           <div className='flex flex-col mdl:flex-row py-4 gap-4 px-8'>

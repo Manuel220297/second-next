@@ -6,43 +6,11 @@ import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import Link from 'next/link';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Grade } from '@/lib/actions/getGrades';
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Subjects = {
-  name: string;
-  students: {
-    id: string;
-    firstName: string;
-    surname: string;
-    grades: {
-      prelim: number;
-      midterm: number;
-      prefinal: number;
-      final: number;
-    };
-    avatar: string;
-  }[];
-  posts: {
-    id: string;
-    title: string;
-    content: string;
-    timestamp: string;
-    images?: {
-      url: string;
-      alt: string;
-    }[];
-    attachments: {
-      filename: string;
-      url: string;
-      type: string;
-    }[];
-  }[];
-};
-
-export const columns: ColumnDef<Subjects>[] = [
+export const columns: ColumnDef<Grade>[] = [
   {
-    accessorKey: 'name',
+    accessorKey: 'subjects.name',
     header: ({ column }) => {
       return (
         <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
@@ -55,35 +23,35 @@ export const columns: ColumnDef<Subjects>[] = [
   {
     header: 'Prelim',
     cell: ({ row }) => {
-      const students = row.original.students;
-      const student = students.find((s) => s.id === '1');
-      return student ? student.grades.prelim : 'N/A';
+      const grade = row.original;
+
+      return grade?.prelim ?? 'N/A';
     },
   },
   {
     header: 'Midterm',
     cell: ({ row }) => {
-      const students = row.original.students;
-      const student = students.find((s) => s.id === '1');
-      return student ? student.grades.midterm : 'N/A';
+      const grade = row.original;
+
+      return grade?.midterm ?? 'N/A';
     },
   },
 
   {
     header: 'Prefinal',
     cell: ({ row }) => {
-      const students = row.original.students;
-      const student = students.find((s) => s.id === '1');
-      return student ? student.grades.prefinal : 'N/A';
+      const grade = row.original;
+
+      return grade?.prefinal ?? 'N/A';
     },
   },
 
   {
     header: 'Final',
     cell: ({ row }) => {
-      const students = row.original.students;
-      const student = students.find((s) => s.id === '1');
-      return student ? student.grades.final : 'N/A';
+      const grade = row.original;
+
+      return grade?.final ?? 'N/A';
     },
   },
 ];

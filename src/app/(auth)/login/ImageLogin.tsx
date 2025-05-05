@@ -6,7 +6,7 @@ import React from 'react';
 const ImageLogin = () => {
   const { theme } = useTheme();
 
-  const imageCount = 1; //
+  const imageCount = 7; //
   const randomIndex = Math.floor(Math.random() * imageCount);
 
   const imageSrc = theme === 'dark' ? `/images/dark/${randomIndex}.webp` : `/images/light/${randomIndex}.webp`;
