@@ -1,12 +1,12 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@font-face {
+/* @font-face {
   font-family: 'MyCustomFont';
   src: url('/fonts/MyCustomFont-Regular.woff2') format('woff2'), url('/fonts/MyCustomFont-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -53,8 +53,8 @@ html body[data-scroll-locked] {
   --radius-: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  /* --breakpoint-md: 51.5rem;
-  --breakpoint-mdl: 67.5rem;
+  --breakpoint-md: 48.5rem;
+  /* --breakpoint-mdl: 67.5rem;
   --breakpoint-lg: 85.5rem;
   --breakpoint-xl: 100rem; */
 }

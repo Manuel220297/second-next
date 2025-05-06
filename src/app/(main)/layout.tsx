@@ -5,6 +5,7 @@ import AppSidebar from '@/projects/components/AppSidebar';
 import AppNavbar from '@/projects/components/AppNavbar';
 import localFont from 'next/font/local';
 import { AutoBreadcrumb } from '@/projects/components/AutoBreadcrumb';
+import AuthWrapper from '@/projects/providers/AuthWrapper';
 
 // const geistMono = localFont({
 //   src: [
@@ -41,16 +42,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={` antialiased flex`}>
-      <SidebarProvider>
-        <AppSidebar></AppSidebar>
-        <main className='w-full'>
-          <AppNavbar></AppNavbar>
-          <AutoBreadcrumb className='px-4 hidden md:block' />
+    <AuthWrapper>
+      <div className={` antialiased flex`}>
+        <SidebarProvider>
+          <AppSidebar></AppSidebar>
+          <main className='w-full'>
+            <AppNavbar></AppNavbar>
+            <AutoBreadcrumb className='px-4 hidden md:block' />
 
-          {children}
-        </main>
-      </SidebarProvider>
-    </div>
+            {children}
+          </main>
+        </SidebarProvider>
+      </div>
+    </AuthWrapper>
   );
 }

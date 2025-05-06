@@ -4,6 +4,7 @@ import UserHeader from './UserHeader';
 import users from '@/data/users.json';
 import { ReactNode } from 'react';
 import getGrades from '@/lib/actions/getGrades';
+import { getLoggedInUser } from '@/lib/server/appwrite';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -14,10 +15,19 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 export default async function UserLayout({ children, params }: { children: ReactNode; params: { id: string } }) {
   const { id } = await params;
+  const { user } = await getLoggedInUser();
 
+  // console.log('User ID:', user?.id);
+  // console.log('Web Id', id);
   const { documents: grades } = await getGrades(id);
 
-  if (!grades[0]) return <div>User not found.</div>;
+  if (id == user?.id && !grades[0]) {
+    return <div>You account is still incomplete, Click here to complete your account</div>;
+  }
+
+  if (!grades[0]) {
+    return <div>User not found.</div>;
+  }
   return (
     <div className={`antialiased flex`}>
       <main className='grid grid-rows-2 h-[130vh] py-4 w-full'>

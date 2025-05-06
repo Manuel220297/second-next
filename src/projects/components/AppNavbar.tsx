@@ -24,6 +24,8 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import getUsername from '@/lib/actions/getUsername';
 import { cookies } from 'next/headers';
 import { createAdminClient, getLoggedInUser } from '@/lib/server/appwrite';
+import { Badge } from '@/components/ui/badge';
+import { FaUserShield } from 'react-icons/fa6';
 
 const getName = async () => {
   const session = await cookies();
@@ -37,13 +39,20 @@ const getName = async () => {
 
 const AppNavbar = async () => {
   const { user } = await getLoggedInUser();
+  const containsSuper = user?.label.includes('superuser');
 
   const username = await getName();
   return (
     <nav className='p-4 flex items-center  justify-between'>
       <SidebarTrigger></SidebarTrigger>
       <div className='flex items-center gap-4'>
-        <Link href={'/'}>Hello {username}</Link>
+        <Badge>
+          <FaUserShield />
+          Admin
+        </Badge>
+        <Link href={'/'} className='hidden md:inline'>
+          Hello {username}
+        </Link>
         <ModeToggle></ModeToggle>
         <DropdownMenu>
           <DropdownMenuTrigger>

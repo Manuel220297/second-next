@@ -17,6 +17,15 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+  const [globalFilter, setGlobalFilter] = useState('');
+
+  const globalFilterFn = (row: any, _columnId: string, filterValue: string) => {
+    const name = row.original.name?.toLowerCase() ?? '';
+    const email = row.original.email?.toLowerCase() ?? '';
+    const search = filterValue.toLowerCase();
+    return name.includes(search) || email.includes(search);
+  };
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ location: false, id: false });
@@ -30,18 +39,21 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn,
 
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      globalFilter,
     },
   });
 
   return (
     <>
       <div className='flex items-center py-4'>
-        <Input placeholder='Filter emails...' value={(table.getColumn('email')?.getFilterValue() as string) ?? ''} onChange={(event) => table.getColumn('email')?.setFilterValue(event.target.value)} className='max-w-sm' />
+        <Input placeholder='Search for name or email...' value={globalFilter} onChange={(event) => setGlobalFilter(event.target.value)} className='max-w-sm' />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='outline' className='ml-auto'>
