@@ -51,11 +51,13 @@ const AppNavbar = async () => {
       <div className='flex items-center gap-4'>
         <HoverCard>
           <HoverCardTrigger asChild>
-            <a href='https://github.com/Manuel220297' target='_blank'>
-              <Badge>
-                <FaUserShield /> Admin
-              </Badge>
-            </a>
+            {containsSuper && (
+              <a href='https://github.com/Manuel220297' target='_blank'>
+                <Badge>
+                  <FaUserShield /> Admin
+                </Badge>
+              </a>
+            )}
           </HoverCardTrigger>
           <HoverCardContent className='w-80'>
             <div className='flex justify-between space-x-4'>

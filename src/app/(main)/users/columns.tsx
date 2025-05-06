@@ -6,29 +6,34 @@ import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import Link from 'next/link';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Student } from '@/lib/actions/getStudent';
+import { cn } from '@/lib/utils';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Users = {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  location: string;
-  payment: string;
-};
 
-export const columns: ColumnDef<Users>[] = [
+export const columns: ColumnDef<Student>[] = [
   {
-    accessorKey: 'id',
+    accessorKey: 'userId',
     header: 'Id',
   },
   {
-    accessorKey: 'name',
+    accessorKey: 'first_name',
     header: ({ column }) => {
       return (
         <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Name
+          First name
+          <ArrowUpDown className='ml-2 h-4 w-4' />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: 'last_name',
+    header: ({ column }) => {
+      return (
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Last name
           <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       );
@@ -46,9 +51,12 @@ export const columns: ColumnDef<Users>[] = [
     },
   },
   {
-    accessorKey: 'payment',
+    accessorKey: 'isPayed',
     header: 'Payment',
-    cell: ({ row }) => <div className='p-1 bg-amber-500/33 rounded-md w-max text-xs font-light'>{row.getValue('payment')}</div>,
+    cell: ({ row }) => {
+      const isPayed = row.getValue<boolean>('isPayed');
+      return <div className={cn('p-1 rounded-md w-max text-xs font-light', isPayed ? 'bg-emerald-500/20 text-emerald-800' : 'bg-red-500/20 text-red-400')}>{isPayed ? 'Paid' : 'Not Paid'}</div>;
+    },
   },
   {
     accessorKey: 'location',
@@ -64,7 +72,7 @@ export const columns: ColumnDef<Users>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const user = row.original;
-
+      const userId = row.getValue('userId');
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -76,7 +84,7 @@ export const columns: ColumnDef<Users>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild>
-              <Link href={`./users/${user.id}`}>Go to page</Link>
+              <Link href={`./${userId}`}>Go to page</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>

@@ -5,7 +5,7 @@ import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSorte
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftToLine, ArrowRightToLine } from 'lucide-react';
+import { ArrowLeftToLine, ArrowRightToLine, Filter } from 'lucide-react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 
@@ -28,7 +28,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ location: false, id: false });
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ location: false, userId: false });
   const table = useReactTable({
     data,
     columns,
@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='outline' className='ml-auto'>
-              Columns
+              <Filter /> Filter
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
