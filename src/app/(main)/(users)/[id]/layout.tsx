@@ -6,6 +6,7 @@ import { ReactNode } from 'react';
 import getGrades from '@/lib/actions/getGrades';
 import { getLoggedInUser } from '@/lib/server/appwrite';
 import getStudent from '@/lib/actions/getStudent';
+import { formatCourse, formatEducationLevel } from '@/lib/utils';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -32,7 +33,7 @@ export default async function UserLayout({ children, params }: { children: React
   return (
     <div className={`antialiased flex`}>
       <main className='grid grid-rows-2 h-[130vh] py-4 w-full'>
-        <UserHeader first_name={student[0].first_name} />
+        <UserHeader first_name={student[0].first_name} last_name={student[0].last_name} course={formatCourse(student[0].course!)} gradeLevel={formatEducationLevel(student[0].gradeLevel!)} />
         {children}
       </main>
     </div>

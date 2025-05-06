@@ -28,5 +28,5 @@ export default function OAuthPage() {
     finalizeLogin();
   }, []);
 
-  return <p>Signing in with Google...</p>;
+  return <p>Signing in with OAuth...</p>;
 }

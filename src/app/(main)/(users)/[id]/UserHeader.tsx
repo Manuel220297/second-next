@@ -3,11 +3,15 @@ import { Button } from '@/components/ui/button';
 import { Grade } from '@/lib/actions/getGrades';
 import Image from 'next/image';
 import React from 'react';
+import { Student } from '@/lib/actions/getStudent';
 
-const UserHeader = async ({ first_name }: { first_name?: string }) => {
+type StudentProps = Pick<Student, 'first_name' | 'last_name' | 'course' | 'gradeLevel'>;
+
+const UserHeader = async ({ first_name, last_name, course, gradeLevel }: StudentProps) => {
   const imageCount = 2; //
   const randomIndex = Math.floor(Math.random() * imageCount);
   const imgSrc = `/images/profile/icon${randomIndex}.webp`;
+  const fullName = `${first_name} ${last_name}`;
 
   return (
     <>
@@ -22,8 +26,9 @@ const UserHeader = async ({ first_name }: { first_name?: string }) => {
             <AvatarFallback>YU</AvatarFallback>
           </Avatar>
           <div className='flex flex-col ml-62 py-4'>
-            <h1 className='text-primary text-2xl md:text-4xl font-bold'>{first_name || 'Canog Manuel'}</h1>
-            <p className='text-foreground'> Bachelor of Information Technology</p>
+            <h1 className='text-primary text-2xl md:text-4xl font-bold mb-2'>{fullName || 'Canog Manuel'}</h1>
+            <p className='text-foreground text-sm'> {gradeLevel || 'Grade unknown'} </p>
+            <p className='text-foreground text-sm'> {course || 'No Course'} </p>
           </div>
           <div className='flex flex-col lg:flex-row py-4 gap-4 px-8'>
             <Button variant='outline'>Overview</Button>

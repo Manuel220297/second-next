@@ -1,20 +1,13 @@
 import { ID, Query, Models } from 'node-appwrite';
 import { createAdminClient } from '../server/appwrite';
+import { Student } from './getStudent';
 
 export interface Grade extends Models.Document {
   prelim?: number;
   midterm?: number;
   prefinal?: number;
   final?: number;
-  students?: {
-    userId?: string;
-    first_name?: string;
-    last_name?: string;
-    email?: string;
-    location?: string;
-    phone?: string;
-    isPayed?: boolean;
-  };
+  students?: Student;
   subjects?: {
     name?: string;
   };
