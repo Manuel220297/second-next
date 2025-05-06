@@ -4,12 +4,14 @@ import React from 'react';
 import { DataTable } from './data-table';
 import { columns } from './columns';
 import getGrades from '@/lib/actions/getGrades';
+import getStudent from '@/lib/actions/getStudent';
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   const { documents: grades } = await getGrades(id);
+  const { documents: students } = await getStudent(id);
 
-  // console.log('This is Student: ', grades[0].students);
+  console.log('This is Student: ', students[0]);
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-3 min-h-[100vh] md:min-h-auto'>

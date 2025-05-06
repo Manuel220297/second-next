@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { Bell, LogOut, Moon, Settings2, SquareMenu, User } from 'lucide-react';
+import { Bell, CalendarIcon, LogOut, Moon, Settings2, SquareMenu, User } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import ModeToggle from './ModeToggle';
@@ -26,6 +26,9 @@ import { cookies } from 'next/headers';
 import { createAdminClient, getLoggedInUser } from '@/lib/server/appwrite';
 import { Badge } from '@/components/ui/badge';
 import { FaUserShield } from 'react-icons/fa6';
+import { BsShieldFillCheck } from 'react-icons/bs';
+
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 const getName = async () => {
   const session = await cookies();
@@ -46,10 +49,30 @@ const AppNavbar = async () => {
     <nav className='p-4 flex items-center  justify-between'>
       <SidebarTrigger></SidebarTrigger>
       <div className='flex items-center gap-4'>
-        <Badge>
-          <FaUserShield />
-          Admin
-        </Badge>
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <a href='https://github.com/Manuel220297' target='_blank'>
+              <Badge>
+                <FaUserShield /> Admin
+              </Badge>
+            </a>
+          </HoverCardTrigger>
+          <HoverCardContent className='w-80'>
+            <div className='flex justify-between space-x-4'>
+              <Avatar>
+                <AvatarImage src='https://github.com/Manuel220297.png' />
+                <AvatarFallback>VC</AvatarFallback>
+              </Avatar>
+              <div className='space-y-1'>
+                <h4 className='text-sm font-semibold'>@Manuel220297</h4>
+                <p className='text-sm'>Testing lang. Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                <div className='flex items-center pt-2'>
+                  <BsShieldFillCheck className='mr-2 h-4 w-4 opacity-90' /> <span className='text-xs text-muted-foreground'>3rd Year BSIT-1</span>
+                </div>
+              </div>
+            </div>
+          </HoverCardContent>
+        </HoverCard>
         <Link href={'/'} className='hidden md:inline'>
           Hello {username}
         </Link>

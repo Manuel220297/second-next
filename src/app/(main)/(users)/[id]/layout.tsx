@@ -5,12 +5,13 @@ import users from '@/data/users.json';
 import { ReactNode } from 'react';
 import getGrades from '@/lib/actions/getGrades';
 import { getLoggedInUser } from '@/lib/server/appwrite';
+import getStudent from '@/lib/actions/getStudent';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
-  const { documents: grades } = await getGrades(id);
+  const { documents: student } = await getStudent(id);
   return {
-    title: grades[0] ? grades[0].students?.first_name : 'User Page',
+    title: student[0] ? student[0].first_name : 'User Page',
   };
 }
 export default async function UserLayout({ children, params }: { children: ReactNode; params: { id: string } }) {
@@ -19,19 +20,19 @@ export default async function UserLayout({ children, params }: { children: React
 
   // console.log('User ID:', user?.id);
   // console.log('Web Id', id);
-  const { documents: grades } = await getGrades(id);
+  const { documents: student } = await getStudent(id);
 
-  if (id == user?.id && !grades[0]) {
+  if (id == user?.id && !student[0]) {
     return <div>You account is still incomplete, Click here to complete your account</div>;
   }
 
-  if (!grades[0]) {
+  if (!student[0]) {
     return <div>User not found.</div>;
   }
   return (
     <div className={`antialiased flex`}>
       <main className='grid grid-rows-2 h-[130vh] py-4 w-full'>
-        <UserHeader first_name={grades[0].students?.first_name} />
+        <UserHeader first_name={student[0].first_name} />
         {children}
       </main>
     </div>

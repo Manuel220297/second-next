@@ -14,7 +14,7 @@ export default function OAuthPage() {
       console.log('userID:', userId);
       console.log('Secret:', secret);
 
-      const res = await fetch('/api/googlesuccess', {
+      const res = await fetch('/api/success', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId, secret }),
