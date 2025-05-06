@@ -29,22 +29,17 @@ import { FaUserShield } from 'react-icons/fa6';
 import { BsShieldFillCheck } from 'react-icons/bs';
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-
-const getName = async () => {
-  const session = await cookies();
-  const cookieSession = await session.get('myproject-session');
-  if (!cookieSession) {
-    return 'No session';
-  }
-  const username = getUsername(cookieSession?.value);
-  return username;
-};
+import getStudent, { Student } from '@/lib/actions/getStudent';
 
 const AppNavbar = async () => {
   const { user } = await getLoggedInUser();
+
+  if (!user?.id) return <>You are not login</>;
+  const { documents: student } = await getStudent(user?.id);
+
+  console.log('GETT', student[0].avatar);
   const containsSuper = user?.label.includes('superuser');
 
-  const username = await getName();
   return (
     <nav className='p-4 flex items-center  justify-between'>
       <SidebarTrigger></SidebarTrigger>
@@ -62,7 +57,7 @@ const AppNavbar = async () => {
           <HoverCardContent className='w-80'>
             <div className='flex justify-between space-x-4'>
               <Avatar>
-                <AvatarImage src='https://github.com/Manuel220297.png' />
+                <AvatarImage src={'https://github.com/Manuel220297.png'} />
                 <AvatarFallback>VC</AvatarFallback>
               </Avatar>
               <div className='space-y-1'>
@@ -76,13 +71,13 @@ const AppNavbar = async () => {
           </HoverCardContent>
         </HoverCard>
         <Link href={'/'} className='hidden md:inline'>
-          Hello {username}
+          Hello {user?.name}
         </Link>
         <ModeToggle></ModeToggle>
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src='https://github.com/shadcn.png' />
+              <AvatarImage src={student[0].avatar || 'https://github.com/shadcn.png'} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>

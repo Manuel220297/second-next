@@ -11,6 +11,8 @@ export interface Student extends Models.Document {
   isPayed?: boolean;
   gradeLevel?: string;
   course?: string;
+  avatar?: string;
+  wallpaper?: string;
 }
 export default async function getStudent(userId: string): Promise<Models.DocumentList<Student>> {
   const { databases } = await createAdminClient();

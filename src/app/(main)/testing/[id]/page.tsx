@@ -1,66 +1,25 @@
-import { createAdminClient } from '@/lib/server/appwrite';
+import getStudent from '@/lib/actions/getStudent';
+import { getLoggedInUser } from '@/lib/server/appwrite';
 import React from 'react';
 
-export interface Grade {
-  $id: string;
-  prelim: number;
-  midterm: number;
-  prefinal: number;
-  final: number;
-  students: {
-    userId: string;
-    first_name: string;
-    last_name: string;
-    email: string;
-    location: string;
-    phone: string;
-    isPayed: boolean;
-  };
-  subjects: {
-    name: string;
-  };
-}
+const page = async () => {
+  const { user } = await getLoggedInUser();
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = await params;
-  const { databases } = await createAdminClient();
+  if (!user?.id) return <>You are not login</>;
+  const { documents: student } = await getStudent(user?.id);
 
-  const userId = id;
-  let filteredGrades: Grade[] = [];
-
-  try {
-    const res = await databases.listDocuments(
-      'student-project', // Database ID
-      'gradeCollection' // Grades Collection ID
-    );
-    console.log(res.documents[0].students.userId);
-    console.log(res.documents[0].students.isPayed);
-    console.log(userId);
-
-    const allGrades = res.documents as unknown as Grade[];
-
-    // Filter on the server side
-    filteredGrades = allGrades.filter((doc) => doc.students?.userId == userId);
-  } catch (error) {
-    console.error('Error fetching grades:', error);
-  }
+  console.log(
+    'Studenttt map',
+    student[0].grades.map((grade: any) => grade.subjects.name)
+  );
 
   return (
     <div>
-      <h1>Grades for User ID: {userId}</h1>
-      {filteredGrades.length === 0 ? (
-        <p>No grades found.</p>
-      ) : (
-        filteredGrades.map((grade) => (
-          <div key={grade.$id}>
-            <h3>{grade.subjects.name}</h3>
-            <p>Prelim: {grade.prelim}</p>
-            <p>Midterm: {grade.midterm}</p>
-            <p>Prefinal: {grade.prefinal}</p>
-            <p>Final: {grade.final}</p>
-          </div>
-        ))
-      )}
+      {student[0].grades.map((grades: any, gradesIndex: React.Key | null | undefined) => {
+        <p key={gradesIndex}> {grades} </p>;
+      })}
     </div>
   );
-}
+};
+
+export default page;

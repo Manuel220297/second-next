@@ -61,10 +61,18 @@ export const columns: ColumnDef<Student>[] = [
   {
     accessorKey: 'location',
     header: 'Location',
+    cell: ({ row }) => {
+      const location = row.getValue<string>('location');
+      return location?.trim() ? location : 'N/A';
+    },
   },
   {
     accessorKey: 'phone',
     header: 'Phone',
+    cell: ({ row }) => {
+      const phone = row.getValue<string>('phone');
+      return phone?.trim() ? phone : 'N/A';
+    },
   },
 
   {
