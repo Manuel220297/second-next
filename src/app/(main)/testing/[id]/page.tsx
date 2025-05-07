@@ -8,9 +8,7 @@ const TestingPage = async () => {
   if (!user?.id) return <>You are not login</>;
   const { documents: student } = await getStudent(user?.id);
 
-  console.log('Studenttt schedules from grades', student[0].grades?.[2].subjects?.scheduleDay); // not working
-  console.log('Studenttt schedule', student[0].subjects[0].schedule); //working
-
+  console.log('Studenttt schedules from grades', student[0].grades?.[2].subjects?.scheduleDay);
   return (
     <div>
       <ul>
