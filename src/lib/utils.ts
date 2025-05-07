@@ -53,8 +53,11 @@ export function formatEducationLevel(code: string): string {
 }
 
 export function formatCourse(courseCode: string): string {
-  return courseCode
-    .split('_')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  if (courseCode) {
+    return courseCode
+      .split('_')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+  return 'No course';
 }

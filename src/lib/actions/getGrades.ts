@@ -8,12 +8,12 @@ export interface Grade extends Models.Document {
   prefinal?: number;
   final?: number;
   students?: Student;
-  subjects?: {
-    name?: string;
-    id?: string;
-    scheduleStart: string;
-    scheduleEnd: string;
-    scheduleDay: string;
+  subjects: {
+    name: string;
+    id: string;
+    scheduleStart?: string;
+    scheduleEnd?: string;
+    scheduleDay?: string;
   };
 }
 export default async function getGrades(userId: string): Promise<Models.DocumentList<Grade>> {

@@ -7,6 +7,5 @@ export default async function getStudentLists(): Promise<Student[]> {
 
   const { documents } = await databases.listDocuments('student-project', 'studentCollection');
 
-  console.log('This are the documents', documents);
   return documents as Student[];
 }

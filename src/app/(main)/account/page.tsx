@@ -11,7 +11,7 @@ const AccountPage = async () => {
   return (
     <div className='px-4'>
       <p className='my-4'>Your user id: {user?.id}</p>
-      <AppAccountPage defaultValues={student[0]}></AppAccountPage>
+      <AppAccountPage defaultValues={student[0]} userId={user!.id}></AppAccountPage>
     </div>
   );
 };

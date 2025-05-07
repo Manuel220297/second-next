@@ -55,7 +55,7 @@ export const columns: ColumnDef<Student>[] = [
     header: 'Payment',
     cell: ({ row }) => {
       const isPayed = row.getValue<boolean>('isPayed');
-      return <div className={cn('p-1 rounded-md w-max text-xs font-light', isPayed ? 'bg-emerald-500/20 text-emerald-800' : 'bg-red-500/20 text-red-400')}>{isPayed ? 'Paid' : 'Not Paid'}</div>;
+      return <div className={cn('p-1 rounded-md w-max text-xs font-light', isPayed ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400')}>{isPayed ? 'Paid' : 'Not Paid'}</div>;
     },
   },
   {

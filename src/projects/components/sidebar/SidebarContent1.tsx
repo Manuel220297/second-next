@@ -91,7 +91,7 @@ const SidebarContent1 = async () => {
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  {student[0].grades?.map((grade: Grade, gradesIndex: React.Key | null | undefined) => {
+                  {student[0]?.grades?.map((grade: Grade, gradesIndex: React.Key | null | undefined) => {
                     function formatTime(timeString: string | null): string {
                       if (!timeString) return '';
                       const [hours, minutes] = timeString.split(':');
@@ -105,8 +105,8 @@ const SidebarContent1 = async () => {
                       });
                     }
 
-                    const formattedScheduleStart = formatTime(grade.subjects!.scheduleStart);
-                    const formattedScheduleEnd = formatTime(grade.subjects!.scheduleEnd);
+                    const formattedScheduleStart = formatTime(grade.subjects?.scheduleStart!);
+                    const formattedScheduleEnd = formatTime(grade.subjects?.scheduleEnd!);
                     const schedule = `${formattedScheduleStart} - ${formattedScheduleEnd}`;
                     return (
                       <SidebarMenuButton className='overflow-visible' key={gradesIndex} asChild>
@@ -132,7 +132,7 @@ const SidebarContent1 = async () => {
                   <SidebarMenuButton asChild>
                     <Link href={'/'}>
                       <Plus></Plus>
-                      Add project
+                      Add subject
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

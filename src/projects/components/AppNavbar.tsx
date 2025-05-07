@@ -37,8 +37,7 @@ const AppNavbar = async () => {
   if (!user?.id) return <>You are not login</>;
   const { documents: student } = await getStudent(user?.id);
 
-  console.log('GETT', student[0].avatar);
-  const containsSuper = user?.label.includes('superuser');
+  const containsSuper = user?.label?.includes('superuser');
 
   return (
     <nav className='p-4 flex items-center  justify-between'>
@@ -81,7 +80,7 @@ const AppNavbar = async () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src={student[0].avatar || 'https://github.com/shadcn.png'} />
+              <AvatarImage src={student[0]?.avatar || 'https://github.com/shadcn.png'} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>

@@ -25,7 +25,7 @@ async function signUpWithEmail(formData: FormData) {
     secure: true,
   });
 
-  redirect('/dashboard');
+  redirect('/account');
 }
 
 export default async function SignUpPage() {

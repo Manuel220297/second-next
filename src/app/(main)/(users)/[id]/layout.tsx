@@ -9,6 +9,8 @@ import getStudent from '@/lib/actions/getStudent';
 import { formatCourse, formatEducationLevel } from '@/lib/utils';
 import NotFoundPage from '@/app/not-found';
 import LayoutTransition from '@/projects/components/LayoutTransition';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -26,7 +28,14 @@ export default async function UserLayout({ children, params }: { children: React
   const { documents: student } = await getStudent(id);
 
   if (id == user?.id && !student[0]) {
-    return <div>You account is still incomplete, Click here to complete your account</div>;
+    return (
+      <div>
+        You account is still incomplete,{' '}
+        <Link href={'/account'}>
+          <Button variant='link'>Click here to complete your account</Button>
+        </Link>
+      </div>
+    );
   }
 
   if (!student[0]) {
