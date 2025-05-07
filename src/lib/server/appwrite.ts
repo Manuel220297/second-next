@@ -16,6 +16,9 @@ export async function createSessionClient(session: string) {
     get account() {
       return new Account(client);
     },
+    get databases() {
+      return new Databases(client);
+    },
   };
 }
 
@@ -59,3 +62,9 @@ export async function getLoggedInUser() {
     };
   }
 }
+
+// export async function createGradesDocument(documentId: string) {
+//   const { databases } = await createAdminClient();
+
+//   const { documents } = await databases.createDocument('student-project', 'gradeCollection', documentId);
+// }

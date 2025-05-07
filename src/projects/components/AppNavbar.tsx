@@ -61,7 +61,11 @@ const AppNavbar = async () => {
                 <AvatarFallback>VC</AvatarFallback>
               </Avatar>
               <div className='space-y-1'>
-                <h4 className='text-sm font-semibold'>@Manuel220297</h4>
+                <Button variant='link' className='text-sm font-semibold p-0 m-0 cursor-pointer'>
+                  <a href='https://github.com/Manuel220297' target='_blank'>
+                    @Manuel220297
+                  </a>
+                </Button>
                 <p className='text-sm'>Testing lang. Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
                 <div className='flex items-center pt-2'>
                   <BsShieldFillCheck className='mr-2 h-4 w-4 opacity-90' /> <span className='text-xs text-muted-foreground'>3rd Year BSIT-1</span>

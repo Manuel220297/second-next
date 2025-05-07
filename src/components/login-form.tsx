@@ -2,7 +2,7 @@
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { FaGoogle, FaGithub } from 'react-icons/fa6';
+import { FaGoogle, FaGithub, FaSpinner } from 'react-icons/fa6';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -85,8 +85,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
               </FormItem>
             )}
           />
-          <Button type='submit' className='w-full'>
-            Login
+          <Button disabled={form.formState.isSubmitting} type='submit' className='w-full'>
+            {form.formState.isSubmitting && <FaSpinner className='animate-spin' />}Login
           </Button>
         </form>
       </Form>
@@ -97,14 +97,16 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'form'>)
           <span className='bg-background text-muted-foreground relative z-10 px-2'>Or continue with</span>
         </div>
         <a href={'/api/github_oauth'}>
-          <Button variant='outline' className='w-full'>
+          <Button disabled={form.formState.isSubmitting} variant='outline' className='w-full'>
+            {form.formState.isSubmitting && <FaSpinner className='animate-spin' />}
             <FaGithub />
             Login with GitHub
           </Button>
         </a>
 
         <a href={'/api/google_oauth'}>
-          <Button variant='outline' className='w-full'>
+          <Button disabled={form.formState.isSubmitting} variant='outline' className='w-full'>
+            {form.formState.isSubmitting && <FaSpinner className='animate-spin' />}
             <FaGoogle />
             Login with Google
           </Button>
