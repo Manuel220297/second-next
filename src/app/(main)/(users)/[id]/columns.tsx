@@ -19,6 +19,10 @@ export const columns: ColumnDef<Grade>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const subjectName = row.original.subjects?.name ?? 'N/A';
+      return <div className='whitespace-normal break-words max-w-[200px]'>{subjectName}</div>;
+    },
   },
   {
     header: 'Prelim',

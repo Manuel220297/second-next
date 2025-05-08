@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Restrict /admin to superusers only
-  if (pathname.startsWith('/admin')) {
+  if (pathname.startsWith('/admin') || pathname.startsWith('/users')) {
     console.log('This is admin page');
     const labels = user?.label || [];
     const isSuperUser = labels.includes('superuser');
@@ -29,5 +29,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/admin/:path*'],
+  matcher: ['/', '/admin/:path*', '/users/:path*'],
 };

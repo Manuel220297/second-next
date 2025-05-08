@@ -56,6 +56,7 @@ export default async function UserLayout({ children, params }: { children: React
             gradeLevel={formatEducationLevel(student[0].gradeLevel!)}
             avatar={student[0].avatar}
             wallpaper={student[0].wallpaper}
+            id={student[0].userId}
           />
           {children}
         </main>

@@ -6,10 +6,11 @@ import React from 'react';
 import { Student } from '@/lib/actions/getStudent';
 import { getLoggedInUser } from '@/lib/server/appwrite';
 import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
-type StudentProps = Pick<Student, 'first_name' | 'last_name' | 'course' | 'gradeLevel' | 'avatar' | 'wallpaper'>;
+type StudentProps = Pick<Student, 'first_name' | 'last_name' | 'course' | 'gradeLevel' | 'avatar' | 'wallpaper' | 'id'>;
 
-const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, wallpaper }: StudentProps) => {
+const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, wallpaper, id }: StudentProps) => {
   const random = Math.random();
   let defaultImage = '';
   if (random < 0.15) {
@@ -30,13 +31,13 @@ const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, w
         <div className='h-full relative '>
           <Image src={wallpaper || '/images/profile/wallpaper1.webp'} fill unoptimized alt='Background' className='object-center object-cover'></Image>
         </div>
-        <div className='shadow-md dark:shadow-none dark:outline dark:outline-b-white flex md:px-24 h-[50%] lg:h-[30%] relative justify-between'>
-          <Avatar className='rounded-full top-[-5rem] md:top-[-6rem] left-[2rem] md:left-[8rem] size-42 md:size-48 border-white border-4 shadow-lg dark:shadow-white dark:shadow-md absolute'>
+        <div className='shadow-md dark:shadow-none sm:dark:outline sm:dark:outline-b-white flex sm:flex-row flex-col md:px-24 h-[50%] lg:h-[30%] relative justify-between'>
+          <Avatar className='rounded-full top-[-5rem] md:top-[-6rem] -translate-x-1/2 sm:translate-x-0 left-1/2 sm:left-[2rem] md:left-[8rem] size-42 md:size-48 border-white border-4 shadow-lg dark:shadow-white dark:shadow-md absolute'>
             <AvatarImage src={avatar || defaultImage} alt='profile icon'></AvatarImage>
             <AvatarFallback>YU</AvatarFallback>
           </Avatar>
-          <div className='flex flex-col ml-62 py-4'>
-            <h1 className='text-primary text-2xl md:text-4xl font-bold mb-3'>{fullName || 'Canog Manuel'}</h1>
+          <div className='flex flex-col align-middle items-center sm:items-start mx-auto sm:mx-0 sm:ml-62 py-4'>
+            <h1 className='text-primary text-2xl md:text-4xl font-bold mt-[5rem] sm:mt-0 mb-2'>{fullName || 'John Dung'}</h1>
             <p className='text-foreground text-sm mb-2'> {gradeLevel || 'Grade unknown'} </p>
             <p className='text-foreground text-sm'>
               <Badge variant={'secondary'} className='p-1 px-2 font-semibold'>
@@ -44,11 +45,19 @@ const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, w
               </Badge>
             </p>
           </div>
-          <div className='flex flex-col lg:flex-row py-4 gap-4 px-8'>
-            <Button variant='outline'>Overview</Button>
-            <Button variant='outline'>Information</Button>
-            <Button variant='outline'>Subjects</Button>
-            <Button variant='outline'>Transactions</Button>
+          <div className='flex flex-row sm:flex-col lg:flex-row sm:py-4 sm:gap-4 sm:px-8 mx-auto gap-1 sm:mx-0'>
+            <Button asChild className='px-1.5' variant='outline'>
+              <Link href={`/${id}`}>Overview</Link>
+            </Button>
+            <Button className='px-1.5' variant='outline'>
+              <Link href={`/${id}/information`}>Information</Link>
+            </Button>
+            <Button className='px-1.5' variant='outline'>
+              <Link href={'/subjects'}>Subjects</Link>
+            </Button>
+            <Button className='px-1.5' variant='outline'>
+              <Link href={`/${id}/transaction`}>Transactions</Link>
+            </Button>
           </div>
         </div>
       </header>

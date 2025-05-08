@@ -9,6 +9,7 @@ import { CalendarDays, FileText, MessageSquare, PlusCircle, Users, BookOpen, Cal
 import { Badge } from '@/components/ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Student } from '@/lib/actions/getStudent';
+import { Tweet } from 'react-tweet';
 
 type Props = {
   name: string;
@@ -17,24 +18,43 @@ type Props = {
 };
 
 const AppSubjectPage = ({ name, schedule, students }: Props) => {
-  const [activeTab, setActiveTab] = useState('stream');
+  const [activeTab, setActiveTab] = useState('posts');
 
-  // Fake persons
   const announcements = [
     {
       id: 1,
       author: 'Mr. Testing',
       avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 5, 2025',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, repellat!',
+      date: 'May 8, 2025',
+      contentDescription: 'May bagyo bukas',
+      content: <Tweet id='1920461757866504211' />,
       comments: 0,
     },
     {
       id: 2,
+      author: 'Mr. Testing',
+      avatar: '/placeholder.svg?height=40&width=40',
+      date: 'May 5, 2025',
+      contentDescription: '',
+      content: <Tweet id='1919301347679019225' />,
+      comments: 0,
+    },
+    {
+      id: 3,
+      author: 'Mr. Testing lang',
+      avatar: '/placeholder.svg?height=40&width=40',
+      date: 'May 7, 2025',
+      contentDescription: '',
+      content: <Tweet id='1919930168342176084' />,
+      comments: 0,
+    },
+    {
+      id: 4,
       author: 'Mr. Testing lang',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 4, 2025',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ex eum nulla. Officia praesentium repellendus iste, earum delectus dolorum fugit dolore tempora inventore autem deleniti?',
+      contentDescription: '',
+      content: <Tweet id='1917894680911712479' />,
       comments: 0,
     },
   ];
@@ -100,11 +120,11 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
       </div>
 
       {/* Main Content */}
-      <Tabs defaultValue='stream' className='w-full' onValueChange={setActiveTab}>
+      <Tabs defaultValue='posts' className='w-full' onValueChange={setActiveTab}>
         <TabsList className='mb-6 grid w-full grid-cols-4 max-w-2xl'>
-          <TabsTrigger className='text-xs md:text-sm' value='stream'>
+          <TabsTrigger className='text-xs md:text-sm' value='posts'>
             <MessageSquare className='' />
-            Stream
+            Posts
           </TabsTrigger>
           <TabsTrigger className='text-xs md:text-sm' value='classwork'>
             <FileText className='' />
@@ -121,8 +141,8 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
         </TabsList>
 
         <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
-          <div className={`md:col-span-3 space-y-6 ${activeTab !== 'stream' && activeTab !== 'classwork' ? 'md:col-span-4' : ''}`}>
-            <TabsContent value='stream' className='space-y-6'>
+          <div className={`md:col-span-3 space-y-6 ${activeTab !== 'posts' && activeTab !== 'classwork' ? 'md:col-span-4' : ''}`}>
+            <TabsContent value='posts' className='space-y-6'>
               <Card>
                 <CardHeader className='pb-3'>
                   <div className='flex justify-between items-center'>
@@ -135,15 +155,15 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
                 </CardHeader>
                 <CardContent className='space-y-6'>
                   {announcements.map((announcement) => (
-                    <div key={announcement.id} className='border rounded-lg p-4'>
-                      <div className='flex items-start gap-3'>
-                        <Avatar>
+                    <div key={announcement.id} className='sm:border rounded-lg px-0 sm:p-4'>
+                      <div className='flex items-start gap-3 relative sm:static'>
+                        <Avatar className='absolute sm:static'>
                           <AvatarImage src={announcement.avatar || '/placeholder.svg'} alt={announcement.author} />
                           <AvatarFallback>{announcement.author.substring(0, 2)}</AvatarFallback>
                         </Avatar>
                         <div className='flex-1'>
                           <div className='flex justify-between'>
-                            <div>
+                            <div className='ml-[2.5rem] sm:ml-0'>
                               <h3 className='font-medium'>{announcement.author}</h3>
                               <p className='text-sm text-muted-foreground'>{announcement.date}</p>
                             </div>
@@ -159,7 +179,8 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </div>
-                          <p className='mt-2'>{announcement.content}</p>
+                          <span className='text-lg'>{announcement.contentDescription}</span>
+                          {announcement.content}
                           <div className='mt-4 flex items-center gap-2'>
                             <Button variant='ghost' size='sm'>
                               <MessageSquare className='mr-2 h-4 w-4' />
@@ -274,8 +295,8 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
             </TabsContent>
           </div>
 
-          {/* Sidebar - only show on stream and classwork tabs */}
-          {(activeTab === 'stream' || activeTab === 'classwork') && (
+          {/* Sidebar - only show on posts and classwork tabs */}
+          {(activeTab === 'posts' || activeTab === 'classwork') && (
             <div className='md:col-span-1'>
               <Card>
                 <CardHeader>

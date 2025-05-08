@@ -95,8 +95,9 @@ export const columns: ColumnDef<Student>[] = [
               <Link href={`./${userId}`}>Go to page</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>
+              Edit user <span className='text-xs text-primary/65'>Wala pang functionality</span>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

@@ -14,13 +14,11 @@ const page = async ({ params }: { params: { id: string } }) => {
   console.log('This is Student: ', students[0]);
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-3 min-h-[100vh] md:min-h-auto'>
-        <div className=''>
-          <DonutChart></DonutChart>
-        </div>
-        <div className='col-span-2'>
-          <DataTable columns={columns} data={grades}></DataTable>
-        </div>
+      {/* <div className='flex flex-col min-h-[100vh] md:min-h-auto'>
+        <DonutChart></DonutChart>
+      </div> */}
+      <div className='w-full px-2 sm:px-4 md:px-8 max-w-full mx-auto'>
+        <DataTable columns={columns} data={grades} />
       </div>
     </>
   );

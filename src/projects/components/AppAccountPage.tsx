@@ -34,14 +34,14 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function AppAccountPage({ defaultValues, userId }: { defaultValues?: Partial<FormValues>; userId: string }) {
+export function AppAccountPage({ defaultValues, userId, email }: { defaultValues?: Partial<FormValues>; userId: string; email: string }) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       userId: userId || '',
       first_name: defaultValues?.first_name || '',
       last_name: defaultValues?.last_name || '',
-      email: defaultValues?.email || '',
+      email: email || '',
       location: defaultValues?.location || '',
       phone: defaultValues?.phone || '',
     },
@@ -65,6 +65,19 @@ export function AppAccountPage({ defaultValues, userId }: { defaultValues?: Part
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+        <FormField
+          control={form.control}
+          name='email'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input disabled placeholder='Ex. kahitAno@gmail.com' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name='first_name'
@@ -91,19 +104,7 @@ export function AppAccountPage({ defaultValues, userId }: { defaultValues?: Part
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder='Ex. kahitAno@gmail.com' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         <FormField
           control={form.control}
           name='location'
