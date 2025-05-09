@@ -12,13 +12,13 @@ export interface AccountFormData {
 }
 
 function generateCustomId(firstName: string, lastName: string) {
-  const part1 = firstName.substring(0, 5).toLowerCase();
-  const part2 = lastName.substring(0, 3).toLowerCase();
+  const part1 = firstName.substring(0, 10).toLowerCase();
+  const part2 = lastName.substring(0, 10).toLowerCase();
   const unique = Math.random().toString(36).substring(2, 7);
   return `${part1}-${part2}-${unique}`;
 }
 
-export async function submitAccount(data: AccountFormData) {
+export async function createStudentAccount(data: AccountFormData) {
   const { databases } = await createAdminClient();
 
   try {

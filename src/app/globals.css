@@ -53,7 +53,7 @@ html body[data-scroll-locked] {
   --radius-: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --breakpoint-md: 48.5rem;
+  --breakpoint-md: 50rem;
   /* --breakpoint-mdl: 67.5rem;
   --breakpoint-lg: 85.5rem;
   --breakpoint-xl: 100rem; */

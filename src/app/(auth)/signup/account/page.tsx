@@ -1,6 +1,6 @@
 import getStudent from '@/lib/actions/getStudent';
 import { getLoggedInUser } from '@/lib/server/appwrite';
-import { AppAccountPage } from '@/projects/components/AppAccountPage';
+import { ConfirmStudentAccountPage } from '@/projects/components/ConfirmStudentAccountPage';
 import React from 'react';
 
 const AccountPage = async () => {
@@ -11,7 +11,7 @@ const AccountPage = async () => {
   return (
     <div className='px-4'>
       <p className='my-4'>Your user id: {user?.id}</p>
-      <AppAccountPage defaultValues={student[0]} userId={user!.id} email={user!.email}></AppAccountPage>
+      <ConfirmStudentAccountPage defaultValues={student[0]} userId={user!.id} email={user!.email}></ConfirmStudentAccountPage>
     </div>
   );
 };
