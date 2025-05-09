@@ -13,7 +13,7 @@ type StudentProps = Pick<Student, 'first_name' | 'last_name' | 'course' | 'grade
 const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, wallpaper, id }: StudentProps) => {
   const random = Math.random();
   let defaultImage = '';
-  if (random < 0.15) {
+  if (random < 0.05) {
     defaultImage = `/images/profile/icon${1}.webp`;
   } else if (random < 0.4) {
     defaultImage = `/images/profile/icon${0}.webp`;

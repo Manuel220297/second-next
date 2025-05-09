@@ -1,4 +1,3 @@
-// components/LayoutTransition.tsx
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -9,7 +8,7 @@ export default function LayoutTransition({ children }: { children: React.ReactNo
   const basePath = pathname.split('/').slice(0, 2).join('/');
 
   return (
-    <motion.div key={basePath} initial={{ opacity: 0.1, scale: 0.975 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.975 }} transition={{ duration: 1.33 }}>
+    <motion.div key={basePath} initial={{ opacity: 0.1, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.985 }} transition={{ duration: 1.33 }}>
       {children}
     </motion.div>
   );

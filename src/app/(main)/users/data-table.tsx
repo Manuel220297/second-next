@@ -20,10 +20,11 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
   const [globalFilter, setGlobalFilter] = useState('');
 
   const globalFilterFn = (row: any, _columnId: string, filterValue: string) => {
-    const name = row.original.name?.toLowerCase() ?? '';
+    const first_name = row.original.first_name?.toLowerCase() ?? '';
+    const last_name = row.original.last_name?.toLowerCase() ?? '';
     const email = row.original.email?.toLowerCase() ?? '';
     const search = filterValue.toLowerCase();
-    return name.includes(search) || email.includes(search);
+    return first_name.includes(search) || last_name.includes(search) || email.includes(search);
   };
 
   const [sorting, setSorting] = useState<SortingState>([]);
