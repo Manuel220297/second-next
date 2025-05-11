@@ -9,6 +9,7 @@ import AuthWrapper from '@/projects/providers/AuthWrapper';
 import getStudent from '@/lib/actions/getStudent';
 import { getLoggedInUser } from '@/lib/server/appwrite';
 import getTeacher from '@/lib/actions/getTeacher';
+import { redirect } from 'next/navigation';
 
 // const geistMono = localFont({
 //   src: [
@@ -49,6 +50,10 @@ export default async function RootLayout({
 
   if (user) {
     const { documents: student } = await getStudent(user.id);
+    if (student.length <= 0) {
+      return <>{redirect('/signup/account')}</>;
+    }
+
     if (student.length > 0) {
       isAuth = true;
     } else {
@@ -57,6 +62,10 @@ export default async function RootLayout({
         isAuth = true;
       }
     }
+  }
+
+  if (!isAuth) {
+    return <>{redirect('/login')}</>;
   }
 
   return (

@@ -7,6 +7,7 @@ import { Student } from '@/lib/actions/getStudent';
 import { getLoggedInUser } from '@/lib/server/appwrite';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 type StudentProps = Pick<Student, 'first_name' | 'last_name' | 'course' | 'gradeLevel' | 'avatar' | 'wallpaper' | 'id'>;
 
@@ -31,7 +32,7 @@ const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, w
         <div className='h-full relative '>
           <Image src={wallpaper || '/images/profile/wallpaper1.webp'} fill unoptimized alt='Background' className='object-center object-cover'></Image>
         </div>
-        <div className='shadow-md dark:shadow-none sm:dark:outline sm:dark:outline-b-white flex sm:flex-row flex-col md:px-24 h-[50%] lg:h-[30%] relative justify-between'>
+        <div className='shadow-md dark:shadow-none sm:dark:outline sm:dark:outline-b-white flex sm:flex-row flex-col md:px-24 h-[100%] lg:h-[30%] relative justify-between'>
           <Avatar className='rounded-full top-[-5rem] md:top-[-6rem] -translate-x-1/2 sm:translate-x-0 left-1/2 sm:left-[2rem] md:left-[8rem] size-42 md:size-48 border-white border-4 shadow-lg dark:shadow-white dark:shadow-md absolute'>
             <AvatarImage src={avatar || defaultImage} alt='profile icon'></AvatarImage>
             <AvatarFallback>YU</AvatarFallback>
@@ -45,19 +46,50 @@ const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, w
               </Badge>
             </p>
           </div>
-          <div className='flex flex-row sm:flex-col lg:flex-row sm:py-4 sm:gap-4 sm:px-8 mx-auto gap-1 sm:mx-0'>
+          <div className='hidden sm:flex flex-row sm:flex-col lg:flex-row sm:py-4 sm:gap-4 sm:px-8 mx-auto gap-1 sm:mx-0'>
             <Button asChild className='px-1.5' variant='outline'>
               <Link href={`/${id}`}>Overview</Link>
             </Button>
-            <Button className='px-1.5' variant='outline'>
+            <Button asChild className='px-1.5' variant='outline'>
               <Link href={`/${id}/information`}>Information</Link>
             </Button>
-            <Button className='px-1.5' variant='outline'>
+            <Button asChild className='px-1.5' variant='outline'>
               <Link href={'/subjects'}>Subjects</Link>
             </Button>
-            <Button className='px-1.5' variant='outline'>
+            <Button asChild className='px-1.5' variant='outline'>
               <Link href={`/${id}/transaction`}>Transactions</Link>
             </Button>
+          </div>
+          <div className='flex sm:hidden px-4 py-2'>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant='outline' className='w-full'>
+                  View more
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className='w-full'>
+                <DropdownMenuItem asChild>
+                  <Link className='px-4 py-3' href={`/${id}`}>
+                    Overview
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link className='px-4 py-3' href={`/${id}/information`}>
+                    Information
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link className='px-4 py-3' href='/subjects'>
+                    Subjects
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link className='px-4 py-3' href={`/${id}/transaction`}>
+                    Transactions
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>

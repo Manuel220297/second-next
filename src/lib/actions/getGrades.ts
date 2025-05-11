@@ -23,6 +23,5 @@ export default async function getGrades(userId: string): Promise<Models.Document
 
   const filteredDocuments = documents.documents.filter((doc) => doc.students?.userId === userId);
 
-  console.log(documents);
   return { documents: filteredDocuments } as Models.DocumentList<Grade>;
 }

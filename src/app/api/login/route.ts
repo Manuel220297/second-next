@@ -8,8 +8,7 @@ export async function POST(req: Request) {
 
   try {
     const session = await account.createEmailPasswordSession(email as string, password as string);
-    console.log(session, new Date().getTime());
-    // You could also store the session ID if secret is unavailable
+
     const cookieStore = cookies();
     (await cookieStore).set('myproject-session', session.secret, {
       path: '/',

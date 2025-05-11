@@ -24,10 +24,6 @@ export function AutoBreadcrumb({ className }: Props) {
           const href = '/' + paths.slice(0, index + 1).join('/');
           const isLast = index === paths.length - 1;
 
-          console.log(href);
-          console.log(path);
-          console.log(index);
-
           return (
             <BreadcrumbItem key={href}>
               <ChevronRight size={16} strokeWidth={2} />

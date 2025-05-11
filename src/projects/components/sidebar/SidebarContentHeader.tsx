@@ -7,7 +7,7 @@ import React from 'react';
 const SidebarContentHeader = () => {
   return (
     <div>
-      <SidebarHeader className='py-4'>
+      <SidebarHeader className='py-4.5'>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>

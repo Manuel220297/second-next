@@ -54,7 +54,7 @@ export default async function TransactionPage({ params }: { params: { id: string
                   </div>
                 </div>
 
-                <div className='bg-white p-4 rounded-md shadow-sm w-1/2 ml-6'>
+                <div className='p-4 bg-primary/5 rounded-md shadow-sm w-1/2 ml-6'>
                   <h3 className='font-medium mb-2'>Amount to pay</h3>
                   <p className='text-xs text-primary/75 mb-3'>Payment due on: 05/12/2025</p>
 

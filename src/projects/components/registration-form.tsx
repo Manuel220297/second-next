@@ -54,7 +54,7 @@ export default function RegistrationForm() {
 
     if (res.ok) {
       console.log(`You are a signup user`);
-      router.push('/');
+      router.push('/signup/account');
     } else {
       console.error(`Signup failed: ${data.error}`);
       form.setError('email', {

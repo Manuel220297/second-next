@@ -53,7 +53,7 @@ const AppNavbar = async () => {
   const containsSuper = user?.label?.includes('superuser');
 
   return (
-    <nav className='p-4 flex items-center  justify-between'>
+    <nav className='border-b sticky top-0 z-50 bg-background p-4 flex items-center  justify-between'>
       <SidebarTrigger></SidebarTrigger>
       <div className='flex items-center gap-4'>
         <HoverCard>

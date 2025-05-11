@@ -13,9 +13,9 @@ export const columns: ColumnDef<Grade>[] = [
     accessorKey: 'subjects.name',
     header: ({ column }) => {
       return (
-        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+        <Button className='p-0 m-0 text-xs' variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Subjects
-          <ArrowUpDown className='ml-2 h-4 w-4' />
+          <ArrowUpDown className='sm:ml-2 h-2 w-2 sm:h-4 sm:w-4' />
         </Button>
       );
     },

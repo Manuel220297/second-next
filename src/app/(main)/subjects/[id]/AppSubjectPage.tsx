@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Student } from '@/lib/actions/getStudent';
 import { Tweet } from 'react-tweet';
+import { FacebookEmbed } from 'react-social-media-embed';
 
 type Props = {
   name: string;
@@ -19,42 +20,95 @@ type Props = {
 
 const AppSubjectPage = ({ name, schedule, students }: Props) => {
   const [activeTab, setActiveTab] = useState('posts');
-
   const announcements = [
     {
-      id: 1,
+      id: 6,
       author: 'Mr. Testing',
       avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 8, 2025',
-      contentDescription: 'May bagyo bukas',
-      content: <Tweet id='1920461757866504211' />,
+      date: 'May 11, 2025',
+      contentDescription: '',
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
+            <FacebookEmbed url='https://www.facebook.com/photo?fbid=1005350581760610&set=a.498084749153865' width='100%' />,
+          </div>
+        </div>
+      ),
       comments: 0,
     },
     {
-      id: 2,
+      id: 5,
       author: 'Mr. Testing',
       avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 5, 2025',
+      date: 'May 11, 2025',
       contentDescription: '',
-      content: <Tweet id='1919301347679019225' />,
-      comments: 0,
-    },
-    {
-      id: 3,
-      author: 'Mr. Testing lang',
-      avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 7, 2025',
-      contentDescription: '',
-      content: <Tweet id='1919930168342176084' />,
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
+            <FacebookEmbed url='https://www.facebook.com/rodrigo.leivapizarro/videos/666138999712308' width='100%' />
+          </div>
+        </div>
+      ),
       comments: 0,
     },
     {
       id: 4,
+      author: 'Mr. Testing',
+      avatar: '/placeholder.svg?height=40&width=40',
+      date: 'May 8, 2025',
+      contentDescription: 'May bagyo bukas',
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-[18rem] sm:w-full'>
+            <Tweet id='1920461757866504211' />
+          </div>
+        </div>
+      ),
+      comments: 0,
+    },
+    {
+      id: 3,
+      author: 'Mr. Testing',
+      avatar: '/placeholder.svg?height=40&width=40',
+      date: 'May 8, 2025',
+      contentDescription: '',
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-[18rem] sm:w-full'>
+            <Tweet id='1915933848057114917' />
+          </div>
+        </div>
+      ),
+      comments: 0,
+    },
+    {
+      id: 2,
+      author: 'Mr. Testing lang',
+      avatar: '/placeholder.svg?height=40&width=40',
+      date: 'May 7, 2025',
+      contentDescription: '',
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-[18rem] sm:w-full'>
+            <Tweet id='1919930168342176084' />
+          </div>
+        </div>
+      ),
+      comments: 0,
+    },
+    {
+      id: 1,
       author: 'Mr. Testing lang',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 4, 2025',
       contentDescription: '',
-      content: <Tweet id='1917894680911712479' />,
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-[18rem] sm:w-full'>
+            <Tweet id='1917894680911712479' />
+          </div>
+        </div>
+      ),
       comments: 0,
     },
   ];
