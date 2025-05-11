@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { email, password, name, userType } = data;
+    const { email, password, name } = data;
     const { account } = await createAdminClient();
 
     if (!email || !password || !name) {
@@ -24,12 +24,7 @@ export async function POST(req: Request) {
       secure: true,
     });
 
-    if (userType == 'student') {
-      return NextResponse.redirect(new URL('/signup/account', req.url));
-    }
-    if (userType == 'teacher') {
-      return NextResponse.redirect(new URL('/signup/teacher-account', req.url));
-    }
+    return NextResponse.redirect(new URL('/signup/account', req.url));
   } catch (error) {
     return NextResponse.json({ failed: error });
   }

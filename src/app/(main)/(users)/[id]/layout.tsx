@@ -11,6 +11,7 @@ import NotFoundPage from '@/app/not-found';
 import LayoutTransition from '@/projects/components/LayoutTransition';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import getTeacher from '@/lib/actions/getTeacher';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -27,40 +28,59 @@ export default async function UserLayout({ children, params }: { children: React
   // console.log('Web Id', id);
   const { documents: student } = await getStudent(id);
 
-  if (id == user?.id && !student[0]) {
-    return (
-      <div>
-        You account is still incomplete,{' '}
-        <Link href={'/account'}>
-          <Button variant='link'>Click here to complete your account</Button>
-        </Link>
-      </div>
-    );
-  }
+  let userType: 'student' | 'teacher' | 'unknown' = 'unknown';
 
-  if (!student[0]) {
+  if (student.length > 0) {
+    if (id == user?.id && !student[0]) {
+      return (
+        <div>
+          You account is still incomplete,
+          <Link href={'/account'}>
+            <Button variant='link'>Click here to complete your account</Button>
+          </Link>
+        </div>
+      );
+    }
+
+    if (!student[0]) {
+      return (
+        <div>
+          <NotFoundPage></NotFoundPage>
+        </div>
+      );
+    }
+
     return (
-      <div>
-        <NotFoundPage></NotFoundPage>
-      </div>
+      <LayoutTransition>
+        <div className={`antialiased flex`}>
+          <main className='grid grid-rows-2 h-[130vh] py-4 w-full'>
+            <UserHeader
+              first_name={student[0].first_name}
+              last_name={student[0].last_name}
+              course={formatCourse(student[0].course!)}
+              gradeLevel={formatEducationLevel(student[0].gradeLevel!)}
+              avatar={student[0].avatar}
+              wallpaper={student[0].wallpaper}
+              id={student[0].userId}
+            />
+            {children}
+          </main>
+        </div>
+      </LayoutTransition>
     );
+  } else {
+    const { documents: teacher } = await getTeacher(user!.id);
+
+    userType = 'teacher';
+    if (userType == 'teacher') {
+      if (!teacher[0]) {
+        return (
+          <div>
+            <NotFoundPage></NotFoundPage>
+          </div>
+        );
+      }
+      return <div>You are a teacher, There's still no profile for teacher</div>;
+    }
   }
-  return (
-    <LayoutTransition>
-      <div className={`antialiased flex`}>
-        <main className='grid grid-rows-2 h-[130vh] py-4 w-full'>
-          <UserHeader
-            first_name={student[0].first_name}
-            last_name={student[0].last_name}
-            course={formatCourse(student[0].course!)}
-            gradeLevel={formatEducationLevel(student[0].gradeLevel!)}
-            avatar={student[0].avatar}
-            wallpaper={student[0].wallpaper}
-            id={student[0].userId}
-          />
-          {children}
-        </main>
-      </div>
-    </LayoutTransition>
-  );
 }

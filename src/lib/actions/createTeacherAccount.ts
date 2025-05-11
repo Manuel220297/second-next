@@ -9,6 +9,9 @@ export interface AccountFormData {
   email: string;
   location: string;
   phone: string;
+  specialization: string;
+  experience: string;
+  employment_status: string;
 }
 
 function generateCustomId(firstName: string, lastName: string) {
@@ -35,8 +38,30 @@ export async function createTeacherAccount(data: AccountFormData) {
         email: data.email,
         location: data.location,
         phone: data.phone,
+        specialization: data.specialization,
+        experience: data.experience,
+        employment_status: data.employment_status,
       }
     );
+
+    // Mock api testing
+    // return {
+    //   success: true,
+    //   result: {
+    //     userId: data.userId,
+    //     first_name: data.first_name,
+    //     last_name: data.last_name,
+    //     email: data.email,
+    //     location: data.location,
+    //     phone: data.phone,
+    //     specialization: data.specialization,
+    //     experience: data.experience,
+    //     employment_status: data.employment_status,
+    //     doncumentId: documentId,
+    //     students: [],
+    //     subjects: [],
+    //   },
+    // };
 
     return { success: true, result };
   } catch (error: any) {

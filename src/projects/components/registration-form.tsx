@@ -29,11 +29,7 @@ const formSchema = z
 
 type FormValues = z.infer<typeof formSchema>;
 
-interface RegistrationFormProps {
-  userType: 'student' | 'teacher';
-}
-
-export default function RegistrationForm({ userType }: RegistrationFormProps) {
+export default function RegistrationForm() {
   // Initialize react-hook-form with zod validation
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -48,21 +44,16 @@ export default function RegistrationForm({ userType }: RegistrationFormProps) {
   // Form submission handler
   const router = useRouter();
   async function onSubmit(values: FormValues) {
-    const userValues = {
-      ...values,
-      userType,
-    };
-
     const res = await fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userValues),
+      body: JSON.stringify(values),
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      console.log(`You are a ${userType}`);
+      console.log(`You are a signup user`);
       router.push('/');
     } else {
       console.error(`Signup failed: ${data.error}`);
@@ -71,7 +62,7 @@ export default function RegistrationForm({ userType }: RegistrationFormProps) {
         message: 'Email already exists',
       });
     }
-    console.log(`${userType} registration:`, values);
+    console.log(`registration:`, values);
   }
 
   return (
@@ -135,7 +126,7 @@ export default function RegistrationForm({ userType }: RegistrationFormProps) {
         />
 
         <Button type='submit' className='w-full'>
-          Register as {userType === 'student' ? 'Student' : 'Teacher'}
+          Register now
         </Button>
       </form>
     </Form>

@@ -34,7 +34,20 @@ import getStudent, { Student } from '@/lib/actions/getStudent';
 const AppNavbar = async () => {
   const { user } = await getLoggedInUser();
 
-  if (!user?.id) return <>You are not login</>;
+  if (!user?.id)
+    return (
+      <div className='flex justify-between px-4 py-2'>
+        <div className='font-bold'>You are not login</div>
+        <div>
+          <Button asChild variant='link'>
+            <Link href={'/login'}>Login</Link>
+          </Button>
+          <Button asChild variant='link'>
+            <Link href={'/signup'}>Signup</Link>
+          </Button>
+        </div>
+      </div>
+    );
   const { documents: student } = await getStudent(user?.id);
 
   const containsSuper = user?.label?.includes('superuser');

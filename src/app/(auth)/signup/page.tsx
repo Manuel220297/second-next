@@ -1,48 +1,21 @@
-// src/app/signup/page.jsx
-import { ID } from 'node-appwrite';
-import { createAdminClient } from '@/lib/server/appwrite';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { getLoggedInUser } from '@/lib/server/appwrite';
-import { signUpWithGoogle } from '@/lib/server/oauth';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import RegistrationForm from '@/projects/components/registration-form';
 
-async function signUpWithEmail(formData: FormData) {
-  'use server';
-
-  const email = formData.get('email');
-  const password = formData.get('password');
-  const name = formData.get('name');
-
-  const { account } = await createAdminClient();
-
-  await account.create(ID.unique(), email as string, password as string, name as string);
-  const session = await account.createEmailPasswordSession(email as string, password as string);
-
-  (await cookies()).set('myproject-session', session.secret, {
-    path: '/',
-    httpOnly: true,
-    sameSite: 'strict',
-    secure: true,
-  });
-
-  redirect('/account');
-}
-
-export default async function SignUpPage() {
-  const { isAuthenticated } = await getLoggedInUser();
-  if (isAuthenticated) redirect('/');
-
+export default function RegisterPage() {
   return (
-    <>
-      <form action={signUpWithEmail}>
-        <input id='email' name='email' placeholder='Email' type='email' />
-        <input id='password' name='password' placeholder='Password' minLength={8} type='password' />
-        <input id='name' name='name' placeholder='Name' type='text' />
-        <button type='submit'>Sign up</button>
-      </form>
-      <a href='/api/oauth'>
-        <button type='button'>Sign up with Google</button>
-      </a>
-    </>
+    <div className=' flex items-center justify-center min-h-screen py-12'>
+      <div className='w-full max-w-md space-y-6'>
+        <div className='space-y-2 text-center'>
+          <h1 className='text-3xl font-bold'>Create an Account</h1>
+          <p className='text-muted-foreground'>Choose your account type to register</p>
+        </div>
+        <div className='w-full'>
+          <div className='p-4 pt-6 border rounded-lg shadow-sm'>
+            <h2 className='mb-4 text-xl font-semibold'>Registration</h2>
+            <RegistrationForm />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
