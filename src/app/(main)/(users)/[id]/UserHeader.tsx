@@ -27,18 +27,18 @@ const UserHeader = async ({ first_name, last_name, course, gradeLevel, avatar, w
 
   return (
     <>
-      <header className='flex flex-col w-full mx-auto'>
+      <header className='flex flex-col w-[90%] mx-auto rounded-xl border border-black/10'>
         {/* Header Image */}
-        <div className='h-full relative '>
-          <Image src={wallpaper || '/images/profile/wallpaper1.webp'} fill unoptimized alt='Background' className='object-center object-cover'></Image>
+        <div className='h-full relative rounded-xl'>
+          <Image src={wallpaper || '/images/profile/wallpaper1.webp'} fill unoptimized alt='Background' className='object-center object-cover rounded-xl'></Image>
         </div>
-        <div className='shadow-md dark:shadow-none sm:dark:outline sm:dark:outline-b-white flex sm:flex-row flex-col md:px-24 h-[100%] lg:h-[30%] relative justify-between'>
+        <div className='rounded-xl shadow-md dark:shadow-none sm:dark:outline sm:dark:outline-b-white flex sm:flex-row flex-col md:px-24 h-[100%] 2xl:h-[30%] relative justify-between'>
           <Avatar className='rounded-full top-[-5rem] md:top-[-6rem] -translate-x-1/2 sm:translate-x-0 left-1/2 sm:left-[2rem] md:left-[8rem] size-42 md:size-48 border-white border-4 shadow-lg dark:shadow-white dark:shadow-md absolute'>
             <AvatarImage src={avatar || defaultImage} alt='profile icon'></AvatarImage>
             <AvatarFallback>YU</AvatarFallback>
           </Avatar>
           <div className='flex flex-col align-middle items-center sm:items-start mx-auto sm:mx-0 sm:ml-62 py-4'>
-            <h1 className='text-primary text-2xl md:text-4xl font-bold mt-[5rem] sm:mt-0 mb-2'>{fullName || 'John Dung'}</h1>
+            <h1 className='text-primary text-2xl md:text-3xl 2xl:text-4xl font-bold mt-[5rem] sm:mt-0 mb-2'>{fullName || 'John Dung'}</h1>
             <p className='text-foreground text-sm mb-2'> {gradeLevel || 'Grade unknown'} </p>
             <p className='text-foreground text-sm'>
               <Badge variant={'secondary'} className='p-1 px-2 font-semibold'>

@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { createStudentAccount } from '@/lib/actions/createStudentAccount';
 import { createAdminClient } from '@/lib/server/appwrite';
 import { ID } from 'node-appwrite';
 import { cookies } from 'next/headers';

@@ -45,33 +45,23 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let isAuth = false;
   const { user } = await getLoggedInUser();
 
-  if (user) {
-    const { documents: student } = await getStudent(user.id);
-    if (student.length <= 0) {
-      return <>{redirect('/signup/account')}</>;
-    }
+  if (!user) redirect('/login');
 
-    if (student.length > 0) {
-      isAuth = true;
-    } else {
-      const { documents: teacher } = await getTeacher(user.id);
-      if (teacher.length > 0) {
-        isAuth = true;
-      }
-    }
-  }
+  const [studentRes, teacherRes] = await Promise.all([getStudent(user.id), getTeacher(user.id)]);
 
-  if (!isAuth) {
-    return <>{redirect('/login')}</>;
+  const isStudent = studentRes.documents.length > 0;
+  const isTeacher = teacherRes.documents.length > 0;
+
+  if (!isStudent && !isTeacher) {
+    redirect('/signup/account');
   }
 
   return (
     <div className={` antialiased flex`}>
       <SidebarProvider>
-        {isAuth ? <AppSidebar></AppSidebar> : ''}
+        <AppSidebar></AppSidebar>
         <main className='w-full'>
           <AppNavbar></AppNavbar>
           <AutoBreadcrumb className='px-4 hidden md:block' />

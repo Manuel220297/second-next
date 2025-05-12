@@ -14,7 +14,7 @@ const UsersPage = async () => {
 
   // database users
   const user = await getStudentLists();
-  console.log('These are users,', user);
+  // console.log('These are users,', user);
 
   return (
     <div className='mx-4'>

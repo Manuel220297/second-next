@@ -23,6 +23,9 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { getLoggedInUser } from '@/lib/server/appwrite';
 import getStudent from '@/lib/actions/getStudent';
 import { Grade } from '@/lib/actions/getGrades';
+import getTeacher from '@/lib/actions/getTeacher';
+import SidebarContentStudent from './SidebarContentStudent';
+import SidebarContentTeacher from './SidebarContentTeacher';
 
 // Menu items.
 const items = [
@@ -58,6 +61,59 @@ const SidebarContent1 = async () => {
   if (!user?.id) return <>You are not login</>;
   const { documents: student } = await getStudent(user?.id);
 
+  if (student.length <= 0) {
+    const { documents: teacher } = await getTeacher(user?.id);
+    console.log('🚀 ~ SidebarContent1 ~ teacher:', teacher?.[0].subjects?.[0]);
+    return (
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={'/'}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                  {item.title == 'Inbox' && <SidebarMenuBadge>24</SidebarMenuBadge>}
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <hr />
+        <Collapsible defaultOpen className='group/collapsible'>
+          <SidebarGroup>
+            <SidebarGroupLabel asChild>
+              <CollapsibleTrigger className='dark:hover:bg-white/8 hover:bg-black/3  cursor-pointer'>
+                <BookOpen className='mr-2' /> Subjects
+                <ChevronDown className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180' />
+              </CollapsibleTrigger>
+            </SidebarGroupLabel>
+            <CollapsibleContent>
+              <SidebarGroupContent>
+                <SidebarContentTeacher teacher={teacher} />
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href={'/'}>
+                        <Plus></Plus>
+                        Add subject
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </CollapsibleContent>
+          </SidebarGroup>
+        </Collapsible>
+      </SidebarContent>
+    );
+  }
+
   return (
     <SidebarContent>
       <SidebarGroup>
@@ -89,44 +145,7 @@ const SidebarContent1 = async () => {
           </SidebarGroupLabel>
           <CollapsibleContent>
             <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  {student[0]?.grades?.map((grade: Grade, gradesIndex: React.Key | null | undefined) => {
-                    function formatTime(timeString: string | null): string {
-                      if (!timeString) return '';
-                      const [hours, minutes] = timeString.split(':');
-                      const date = new Date();
-                      date.setHours(parseInt(hours));
-                      date.setMinutes(parseInt(minutes));
-                      return date.toLocaleTimeString('en-US', {
-                        hour: 'numeric',
-                        minute: 'numeric',
-                        hour12: true,
-                      });
-                    }
-
-                    const formattedScheduleStart = formatTime(grade.subjects?.scheduleStart!);
-                    const formattedScheduleEnd = formatTime(grade.subjects?.scheduleEnd!);
-                    const schedule = `${formattedScheduleStart} - ${formattedScheduleEnd}`;
-                    return (
-                      <SidebarMenuButton className='overflow-visible' key={gradesIndex} asChild>
-                        <Link className='my-4' href={`/subjects/${grade.subjects?.id}`}>
-                          <div className='flex flex-col'>
-                            <div>{grade.subjects?.name}</div>
-                            <div className='text-primary/65 text-xs'>
-                              {schedule} {grade.subjects?.scheduleDay ? grade.subjects.scheduleDay.charAt(0).toUpperCase() + grade.subjects.scheduleDay.slice(1) : ''}
-                            </div>
-                          </div>
-                        </Link>
-                      </SidebarMenuButton>
-                    );
-                  })}
-                  {/* <SidebarMenuButton asChild>
-     
-                    <Link href={'/'}>See all projects</Link>
-                  </SidebarMenuButton> */}
-                </SidebarMenuItem>
-              </SidebarMenu>
+              <SidebarContentStudent student={student} />
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>

@@ -22,7 +22,7 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
   const [activeTab, setActiveTab] = useState('posts');
   const announcements = [
     {
-      id: 6,
+      id: 7,
       author: 'Mr. Testing',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 11, 2025',
@@ -31,6 +31,21 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
         <div className='w-full flex justify-start'>
           <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
             <FacebookEmbed url='https://www.facebook.com/photo?fbid=1005350581760610&set=a.498084749153865' width='100%' />,
+          </div>
+        </div>
+      ),
+      comments: 0,
+    },
+    {
+      id: 6,
+      author: 'Mr. Testing',
+      avatar: '/placeholder.svg?height=40&width=40',
+      date: 'May 11, 2025',
+      contentDescription: '',
+      content: (
+        <div className='w-full flex justify-start'>
+          <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
+            <video src='/videos/rikka_spin.webm' autoPlay loop></video>
           </div>
         </div>
       ),
@@ -153,7 +168,7 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
             {schedule && <p className='text-white/80 mt-1'>{schedule}</p>}
           </div>
         </div>
-        <div className='bg-card rounded-b-lg border shadow-sm p-4 flex justify-between items-center'>
+        <div className='bg-card rounded-b-lg border shadow-sm p-4 flex justify-center sm:justify-between items-center'>
           <div className='flex items-center gap-2'>
             <Badge variant='outline' className='bg-blue-50 hidden lg:flex text-blue-700 border-blue-200'>
               <Calendar className='mr-1 h-3 w-3' />
@@ -165,10 +180,10 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
               <Calendar className='mr-2 h-4 w-4' />
               Calendar
             </Button>
-            {/* <Button variant='outline' size='sm'>
+            <Button variant='outline' size='sm'>
               <BookOpen className='mr-2 h-4 w-4' />
               Materials
-            </Button> */}
+            </Button>
           </div>
         </div>
       </div>
@@ -379,6 +394,9 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
                 </CardHeader>
                 <CardContent>
                   <div className='space-y-4'>
+                    <div className='flex items-center gap-2'>
+                      <span className='font-medium'>Teachers</span>
+                    </div>
                     <div className='flex items-center gap-2'>
                       <BookOpen className='h-4 w-4 text-muted-foreground' />
                       <span>{name}</span>

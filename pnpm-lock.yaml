@@ -119,6 +119,9 @@ importers:
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      linkify-react:
+        specifier: ^4.3.1
+        version: 4.3.1(linkifyjs@4.3.1)(react@19.1.0)
       lucide-react:
         specifier: ^0.503.0
         version: 0.503.0(react@19.1.0)
@@ -2488,6 +2491,15 @@ packages:
   lightningcss@1.29.2:
     resolution: {integrity: sha512-6b6gd/RUXKaw5keVdSEtqFVdzWnU5jMxTUjA2bVcMNPLwSQ08Sv/UodBVtETLCn7k4S1Ibxwh7k68IwLZPgKaA==}
     engines: {node: '>= 12.0.0'}
+
+  linkify-react@4.3.1:
+    resolution: {integrity: sha512-w8ahBdCwF9C/doS4V3nE93QF1oyORmosvi8UEUbpHYws077eGzhkxUzJQcE2/SU5Q2K7SD80M4ybwwZGHErx5Q==}
+    peerDependencies:
+      linkifyjs: ^4.0.0
+      react: '>= 15.0.0'
+
+  linkifyjs@4.3.1:
+    resolution: {integrity: sha512-DRSlB9DKVW04c4SUdGvKK5FR6be45lTU9M76JnngqPeeGDqPwYc0zdUErtsNVMtxPXgUWV4HbXbnC4sNyBxkYg==}
 
   load-script@1.0.0:
     resolution: {integrity: sha512-kPEjMFtZvwL9TaZo0uZ2ml+Ye9HUMmPwbYRJ324qF9tqMejwykJ5ggTyvzmrbBeapCAbk98BSbTeovHEEP1uCA==}
@@ -5647,6 +5659,13 @@ snapshots:
       lightningcss-linux-x64-musl: 1.29.2
       lightningcss-win32-arm64-msvc: 1.29.2
       lightningcss-win32-x64-msvc: 1.29.2
+
+  linkify-react@4.3.1(linkifyjs@4.3.1)(react@19.1.0):
+    dependencies:
+      linkifyjs: 4.3.1
+      react: 19.1.0
+
+  linkifyjs@4.3.1: {}
 
   load-script@1.0.0: {}
 
