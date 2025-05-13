@@ -10,6 +10,8 @@ import getStudent from '@/lib/actions/getStudent';
 import { getLoggedInUser } from '@/lib/server/appwrite';
 import getTeacher from '@/lib/actions/getTeacher';
 import { redirect } from 'next/navigation';
+import 'react-pdf/dist/Page/TextLayer.css';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
 
 // const geistMono = localFont({
 //   src: [

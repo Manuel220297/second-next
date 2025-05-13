@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Material } from '@/lib/actions/createPost';
 import Linkify from 'linkify-react';
+import Link from 'next/link';
 
 interface MaterialsListProps {
   materials: Material[];
@@ -16,7 +17,6 @@ export default function MaterialsList({ materials }: MaterialsListProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredMaterials = materials.filter((material) => material.title.toLowerCase().includes(searchQuery.toLowerCase()) || material.content.toLowerCase().includes(searchQuery.toLowerCase()));
-  console.log('💦 ack ack', materials[1].subjects);
 
   return (
     <div className='space-y-6'>
@@ -36,6 +36,7 @@ export default function MaterialsList({ materials }: MaterialsListProps) {
               <CardHeader className='pb-3'>
                 <CardTitle className=''>{material.title}</CardTitle>
               </CardHeader>
+              <CardDescription className=''> {material.subjects?.id} </CardDescription>
               <CardContent className='pt-4'>
                 <CardDescription className=''>
                   <Linkify
@@ -47,6 +48,7 @@ export default function MaterialsList({ materials }: MaterialsListProps) {
                     {material.content}
                   </Linkify>
                 </CardDescription>
+                {material.pdfile && <Link href={`/subjects/${material.subjects?.id}/learn/pdf/?url=${encodeURIComponent(material.pdfile)}`}>Click here</Link>}
               </CardContent>
             </Card>
           ))}

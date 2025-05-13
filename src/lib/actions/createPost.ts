@@ -11,6 +11,7 @@ export interface Material {
   title: string;
   content: string;
   subjects?: Subject;
+  pdfile?: string;
 }
 
 function generateCustomId(title: string) {
@@ -35,9 +36,10 @@ export async function createPost(data: Material) {
         title: data.title,
         content: data.content,
         subjects: data.subjectId,
+        pdfile: data.pdfile,
       }
     );
-
+    console.log(data);
     revalidatePath(`/subjects/${data.subjectId}/learn`, 'page');
     return { success: true, result };
   } catch (error: any) {

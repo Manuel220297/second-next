@@ -15,6 +15,8 @@ const LearnPage = async ({ params }: { params: { id: string } }) => {
 
   const materials = await getLearningMaterialsLists();
 
+  const filteredMaterials = materials.filter((material) => material.subjects?.id === id);
+
   // console.log('These are materials', materials);
   if (user) {
     const { documents: student } = await getStudent(user.id);
@@ -28,15 +30,29 @@ const LearnPage = async ({ params }: { params: { id: string } }) => {
     }
   }
 
+  //admin later
+  console.log(
+    '🚀 ~ LearnPage ~ subject[0].teachers.map((teacher: any) => teacher.userId):',
+    subject[0].teachers.map((teacher: any) => teacher.userId),
+    'userId: ',
+    user?.id
+  );
+
+  const labels = user?.label || [];
+  const isSuperUser = labels.includes('superuser');
+  const isMatch = subject[0].teachers.some((teacher: any) => (Array.isArray(teacher.userId) ? teacher.userId.includes(user?.id) : teacher.userId === user?.id));
+
+  console.log('Match:', isMatch);
+
   return (
     <>
       Learning Modules {subject[0].name} {materials[0].authorId}
       {/* <Button></Button> */}
       <div className='container mx-auto py-10'>
         <h1 className='text-3xl font-bold mb-6'>Materials</h1>
-        <MaterialsList materials={materials} />
+        <MaterialsList materials={filteredMaterials} />
       </div>
-      <CreatePost authorId={user!.id} subjectId={id}></CreatePost>
+      {(isMatch || isSuperUser) && <CreatePost authorId={user!.id} subjectId={id} />}
     </>
   );
 };

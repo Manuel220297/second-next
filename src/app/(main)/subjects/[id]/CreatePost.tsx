@@ -15,6 +15,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   content: z.string().min(1, 'Content is required'),
+  pdfile: z.string().url('Must be an url'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -30,6 +31,7 @@ export default function CreatePost({ authorId, subjectId }: Props) {
     defaultValues: {
       title: '',
       content: '',
+      pdfile: '',
     },
   });
 
@@ -47,6 +49,7 @@ export default function CreatePost({ authorId, subjectId }: Props) {
     form.reset({
       title: '',
       content: '',
+      pdfile: '',
     });
   };
 
@@ -75,7 +78,7 @@ export default function CreatePost({ authorId, subjectId }: Props) {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder='Title of your learning material' className='font-medium text-lg' {...field} />
+                        <Input placeholder='Title of the material' className='font-medium text-lg' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -88,7 +91,19 @@ export default function CreatePost({ authorId, subjectId }: Props) {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Textarea placeholder='Share educational content, instructions, or announcements...' className='min-h-[120px] resize-none' {...field} />
+                        <Textarea placeholder='Add description' className='min-h-[120px] resize-none' {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='pdfile'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder='Pdfile Link' className='font-medium text-lg' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

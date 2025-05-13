@@ -8,7 +8,6 @@ export async function POST(req: Request) {
   const data = await req.json();
 
   const result = await createPost(data);
-  revalidatePath(`/subjects/${data.subjectId}/learn`, 'page');
 
   return NextResponse.json(result);
 }
