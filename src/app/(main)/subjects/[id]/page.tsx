@@ -28,10 +28,10 @@ const SubjectPage = async ({ params }: { params: { id: string } }) => {
   const formattedScheduleEnd = formatTime(subject[0].scheduleEnd!);
   const schedule = `${formattedScheduleStart} - ${formattedScheduleEnd} ${subject[0].scheduleDay ? subject[0].scheduleDay.charAt(0).toUpperCase() + subject[0].scheduleDay.slice(1) : ''}`;
 
-  console.log(
-    'Page subject:',
-    subject[0].teachers.map((teacher: any) => teacher.userId)
-  );
+  // console.log(
+  //   'Page subject:',
+  //   subject[0].teachers.map((teacher: any) => teacher.userId)
+  // );
   return (
     <>
       <AppSubjectPage name={subject[0].name} schedule={schedule} students={students}></AppSubjectPage>

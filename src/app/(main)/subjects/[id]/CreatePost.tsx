@@ -11,11 +11,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { X, Send } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
-// Define the form schema with Zod
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   content: z.string().min(1, 'Content is required'),
-  pdfile: z.string().url('Must be an url'),
+  pdfile: z.string().url('Must be a valid URL'),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -23,9 +22,10 @@ type FormValues = z.infer<typeof formSchema>;
 type Props = {
   authorId: string;
   subjectId: string;
+  onPostSuccess?: () => void; // ⬅️ NEW PROP
 };
 
-export default function CreatePost({ authorId, subjectId }: Props) {
+export default function CreatePost({ authorId, subjectId, onPostSuccess }: Props) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,7 +35,6 @@ export default function CreatePost({ authorId, subjectId }: Props) {
     },
   });
 
-  // Form submission handler
   const onSubmit = async (values: FormValues) => {
     const res = await fetch('/api/create_post', {
       method: 'POST',
@@ -44,13 +43,9 @@ export default function CreatePost({ authorId, subjectId }: Props) {
     });
 
     if (res.ok) {
-      console.log(res);
+      onPostSuccess?.(); // ⬅️ Trigger re-fetch
+      form.reset();
     }
-    form.reset({
-      title: '',
-      content: '',
-      pdfile: '',
-    });
   };
 
   return (
@@ -97,13 +92,14 @@ export default function CreatePost({ authorId, subjectId }: Props) {
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
                   name='pdfile'
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder='Pdfile Link' className='font-medium text-lg' {...field} />
+                        <Input placeholder='PDF Link' className='font-medium text-lg' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
