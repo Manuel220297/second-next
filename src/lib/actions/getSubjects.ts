@@ -12,7 +12,7 @@ export interface Subject extends Models.Document {
 export default async function getSubjects(id: string): Promise<Models.DocumentList<Subject>> {
   const { databases } = await createAdminClient();
 
-  const documents = await databases.listDocuments('student-project', 'subjectCollection');
+  const documents = await databases.listDocuments(process.env.NEXT_PUBLIC_APPWRITE_DATABASE, process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_SUBJECTS);
 
   const filteredDocuments = documents.documents.filter((doc) => doc.id == id);
 

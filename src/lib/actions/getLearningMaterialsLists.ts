@@ -11,7 +11,7 @@ export interface LearningMaterials extends Models.Document {
 export default async function getLearningMaterialsLists(): Promise<LearningMaterials[]> {
   const { databases } = await createAdminClient();
 
-  const { documents } = await databases.listDocuments('student-project', 'materialCollection');
+  const { documents } = await databases.listDocuments(process.env.NEXT_PUBLIC_APPWRITE_DATABASE, process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_MATERIALS);
 
   return documents as LearningMaterials[];
 }

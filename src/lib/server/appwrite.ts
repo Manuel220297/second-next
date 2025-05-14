@@ -66,5 +66,5 @@ export async function getLoggedInUser() {
 // export async function createGradesDocument(documentId: string) {
 //   const { databases } = await createAdminClient();
 
-//   const { documents } = await databases.createDocument('student-project', 'gradeCollection', documentId);
+//   const { documents } = await databases.createDocument();
 // }

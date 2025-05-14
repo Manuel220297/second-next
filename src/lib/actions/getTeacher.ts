@@ -17,7 +17,7 @@ export interface Teacher extends Models.Document {
 export default async function getTeacher(userId: string): Promise<Models.DocumentList<Teacher>> {
   const { databases } = await createAdminClient();
 
-  const { documents } = await databases.listDocuments('student-project', 'teacherCollection');
+  const { documents } = await databases.listDocuments(process.env.NEXT_PUBLIC_APPWRITE_DATABASE, process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_TEACHERS);
 
   const filteredDocuments = documents.filter((doc) => doc.userId === userId);
 
