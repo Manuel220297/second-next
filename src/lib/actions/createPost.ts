@@ -15,7 +15,7 @@ export interface Material {
 }
 
 function generateCustomId(title: string) {
-  const part1 = title.substring(0, 10).toLowerCase();
+  const part1 = title.substring(0, 10).toLowerCase().replace(/\s+/g, '');
   const unique = Math.random().toString(36).substring(2, 7);
   return `${part1}-${unique}`;
 }
