@@ -31,6 +31,7 @@ export default async function UserLayout({ children, params }: { children: React
   let userType: 'student' | 'teacher' | 'unknown' = 'unknown';
 
   if (student.length > 0) {
+    console.log('👏👏', student[0].assessments?.totalBalance);
     if (id == user?.id && !student[0]) {
       return (
         <div>

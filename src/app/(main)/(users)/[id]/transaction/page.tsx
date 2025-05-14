@@ -3,10 +3,25 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { RefreshCcw, Download, HelpCircle } from 'lucide-react';
+import getStudent from '@/lib/actions/getStudent';
 
 export default async function TransactionPage({ params }: { params: { id: string } }) {
   const { id } = await params;
-  console.log('THEID', params);
+  const { documents: student } = await getStudent(id);
+
+  console.log('💦🔴', student[0].assessments?.totalBalance);
+
+  const studentTotalBalance = student[0].assessments?.totalBalance;
+  const studentTotalPayment = student[0].assessments?.totalPayments;
+  const formattedBalance = `₱ ${studentTotalBalance?.toLocaleString('en-PH', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+
+  const formattedPayment = `₱ ${studentTotalPayment?.toLocaleString('en-PH', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
 
   return (
     <div className='container mx-auto py-6'>
@@ -30,11 +45,16 @@ export default async function TransactionPage({ params }: { params: { id: string
                 <div className='space-y-4 w-1/2'>
                   <div className='flex justify-between text-sm'>
                     <span className='text-primary/75'>Net total assessment</span>
-                    <span className='font-medium'>10,425.00</span>
+                    <span className='font-medium'>
+                      {`₱ ${(studentTotalPayment! + studentTotalBalance!).toLocaleString('en-PH', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}` || 0}
+                    </span>
                   </div>
                   <div className='flex justify-between text-sm'>
                     <span className='text-primary/75'>Total payments</span>
-                    <span className='font-medium'>8,340.00</span>
+                    <span className='font-medium'> {formattedPayment} </span>
                   </div>
                   <div className='flex justify-between text-sm'>
                     <span className='text-primary/75'>Total overpayment</span>
@@ -50,7 +70,7 @@ export default async function TransactionPage({ params }: { params: { id: string
                   </div>
                   <div className='flex justify-between text-sm'>
                     <span className='text-primary/75'>Total balance</span>
-                    <span className='font-medium'>2,085.00</span>
+                    <span className='font-medium'> {formattedBalance} </span>
                   </div>
                 </div>
 
@@ -82,7 +102,7 @@ export default async function TransactionPage({ params }: { params: { id: string
 
                     <div className='flex justify-between text-sm pt-2 border-t'>
                       <span className='text-primary/75 font-medium'>Total amount to pay</span>
-                      <span className='font-bold'>₱ 2,085.00</span>
+                      <span className='font-bold'> {formattedBalance} </span>
                     </div>
                   </div>
                 </div>

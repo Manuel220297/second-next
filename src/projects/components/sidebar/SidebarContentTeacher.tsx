@@ -7,7 +7,7 @@ import React from 'react';
 const SidebarContentTeacher = ({ teacher }: any) => {
   return (
     <SidebarMenu>
-      <SidebarMenuItem>
+      <SidebarMenuItem className='hidden'>
         {teacher[0]?.subjects?.map((subjects: Subject, subjectsIndex: React.Key | null | undefined) => {
           function formatTime(timeString: string | null): string {
             if (!timeString) return '';
@@ -26,7 +26,7 @@ const SidebarContentTeacher = ({ teacher }: any) => {
           const formattedScheduleEnd = formatTime(subjects?.scheduleEnd!);
           const schedule = `${formattedScheduleStart} - ${formattedScheduleEnd}`;
           return (
-            <SidebarMenuButton className='overflow-visible' key={subjectsIndex} asChild>
+            <SidebarMenuButton className='hidden' key={subjectsIndex} asChild>
               <Link className='my-4' href={`/subjects/${subjects?.id}`}>
                 <div className='flex flex-col'>
                   <div>{subjects?.name}</div>

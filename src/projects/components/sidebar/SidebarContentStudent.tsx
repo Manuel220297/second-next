@@ -1,12 +1,21 @@
+'use client';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Grade } from '@/lib/actions/getGrades';
 import Link from 'next/link';
 import React from 'react';
+import { useSidebar } from '@/components/ui/sidebar';
 
 const SidebarContentStudent = ({ student }: any) => {
+  const { state } = useSidebar();
+  const isExpanded = state === 'expanded';
+
+  if (!isExpanded) {
+    return <></>;
+  }
+
   return (
     <SidebarMenu>
-      <SidebarMenuItem>
+      <SidebarMenuItem className=''>
         {student[0]?.grades?.map((grade: Grade, gradesIndex: React.Key | null | undefined) => {
           function formatTime(timeString: string | null): string {
             if (!timeString) return '';
