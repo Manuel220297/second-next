@@ -17,7 +17,8 @@ export default function MaterialsList({ materials }: MaterialsListProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredMaterials = materials.filter((material) => material.title.toLowerCase().includes(searchQuery.toLowerCase()) || material.content.toLowerCase().includes(searchQuery.toLowerCase()));
-
+  console.log('fil..', filteredMaterials);
+  console.log('fil..', materials);
   return (
     <div className='space-y-6'>
       <div className='relative'>

@@ -15,8 +15,8 @@ const AccountPage = async () => {
   const { documents: student } = await getStudent(user!.id);
   const { documents: teacher } = await getTeacher(user!.id);
 
-  if (student.length <= 0 || teacher.length <= 0) {
-    return <>{redirect('/')}</>;
+  if (student.length > 0 || teacher.length > 0) {
+    return redirect('/');
   }
 
   return (

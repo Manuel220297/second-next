@@ -139,7 +139,7 @@ const SidebarContent1 = async () => {
         <SidebarGroup>
           <SidebarGroupLabel asChild>
             <CollapsibleTrigger className='dark:hover:bg-white/8 hover:bg-black/3  cursor-pointer'>
-              <BookOpen className='mr-2' /> Subjects
+              <BookOpen className='mr-2' /> Class
               <ChevronDown className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180' />
             </CollapsibleTrigger>
           </SidebarGroupLabel>

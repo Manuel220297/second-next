@@ -10,6 +10,7 @@ const SubjectPage = async ({ params }: { params: { id: string } }) => {
 
   const { documents: subject } = await getSubjects(id);
   const students = await getStudentLists();
+  const teacherFullName = `${subject[0].teachers.first_name} ${subject[0].teachers.last_name}`;
 
   function formatTime(timeString: string | null): string {
     if (!timeString) return '';
@@ -28,13 +29,9 @@ const SubjectPage = async ({ params }: { params: { id: string } }) => {
   const formattedScheduleEnd = formatTime(subject[0].scheduleEnd!);
   const schedule = `${formattedScheduleStart} - ${formattedScheduleEnd} ${subject[0].scheduleDay ? subject[0].scheduleDay.charAt(0).toUpperCase() + subject[0].scheduleDay.slice(1) : ''}`;
 
-  // console.log(
-  //   'Page subject:',
-  //   subject[0].teachers.map((teacher: any) => teacher.userId)
-  // );
   return (
     <>
-      <AppSubjectPage name={subject[0].name} schedule={schedule} students={students}></AppSubjectPage>
+      <AppSubjectPage name={subject[0].name} schedule={schedule} students={students} teacher={teacherFullName}></AppSubjectPage>
     </>
   );
 };

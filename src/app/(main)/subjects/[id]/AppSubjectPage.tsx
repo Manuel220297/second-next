@@ -11,15 +11,24 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Student } from '@/lib/actions/getStudent';
 import { Tweet } from 'react-tweet';
 import { FacebookEmbed } from 'react-social-media-embed';
+import getTeacher from '@/lib/actions/getTeacher';
+import getSubjects from '@/lib/actions/getSubjects';
+import { MyTweet } from '@/components/my-tweet';
+import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
   name: string;
   schedule?: string;
   students?: Student[];
+  teacher?: string;
 };
 
-const AppSubjectPage = ({ name, schedule, students }: Props) => {
+const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
   const [activeTab, setActiveTab] = useState('posts');
+
+  const NoReplyButton = () => null;
+
   const announcements = [
     {
       id: 7,
@@ -74,13 +83,14 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
       contentDescription: 'May bagyo bukas',
       content: (
         <div className='w-full flex justify-start'>
-          <div className='w-[18rem] sm:w-full'>
-            <Tweet id='1920461757866504211' />
+          <div className='w-full tweet-test'>
+            <Tweet id='1920461757866504211' components={{}} />
           </div>
         </div>
       ),
       comments: 0,
     },
+
     {
       id: 3,
       author: 'Mr. Testing',
@@ -89,7 +99,7 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
       contentDescription: '',
       content: (
         <div className='w-full flex justify-start'>
-          <div className='w-[18rem] sm:w-full'>
+          <div className='w-full tweet-test '>
             <Tweet id='1915933848057114917' />
           </div>
         </div>
@@ -104,7 +114,7 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
       contentDescription: '',
       content: (
         <div className='w-full flex justify-start'>
-          <div className='w-[18rem] sm:w-full'>
+          <div className='w-full tweet-test'>
             <Tweet id='1919930168342176084' />
           </div>
         </div>
@@ -119,7 +129,7 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
       contentDescription: '',
       content: (
         <div className='w-full flex justify-start'>
-          <div className='w-[18rem] sm:w-full'>
+          <div className='w-full tweet-test'>
             <Tweet id='1917894680911712479' />
           </div>
         </div>
@@ -159,13 +169,13 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
   ];
 
   return (
-    <div className='container mx-auto px-4 py-6'>
+    <div className='container mx-auto px-0 sm:px-4 py-6'>
       {/* Class Header */}
       <div className='relative mb-6'>
         <div className='h-40 w-full rounded-t-lg bg-gradient-to-r from-emerald-500 to-teal-600 flex items-end'>
           <div className='p-6 text-white'>
             <h1 className='text-3xl font-bold'>{name}</h1>
-            {schedule && <p className='text-white/80 mt-1'>{schedule}</p>}
+            {teacher && <p className='text-white/80 mt-1'>{teacher}</p>}
           </div>
         </div>
         <div className='bg-card rounded-b-lg border shadow-sm p-4 flex justify-center sm:justify-between items-center'>
@@ -176,14 +186,12 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
             </Badge>
           </div>
           <div className='flex gap-2'>
-            <Button variant='outline' size='sm'>
-              <Calendar className='mr-2 h-4 w-4' />
-              Calendar
-            </Button>
-            <Button variant='outline' size='sm'>
-              <BookOpen className='mr-2 h-4 w-4' />
-              Materials
-            </Button>
+            <Link href={'/subjects/1-networking/learn'}>
+              <Button variant='outline' size='sm' className='cursor-pointer'>
+                <BookOpen className='mr-2 h-4 w-4' />
+                Materials
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -222,7 +230,7 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
                     </Button>
                   </div>
                 </CardHeader>
-                <CardContent className='space-y-6'>
+                <CardContent className='px-0 space-y-6'>
                   {announcements.map((announcement) => (
                     <div key={announcement.id} className='sm:border rounded-lg px-0 sm:p-4'>
                       <div className='flex items-start gap-3 relative sm:static'>
@@ -395,8 +403,9 @@ const AppSubjectPage = ({ name, schedule, students }: Props) => {
                 <CardContent>
                   <div className='space-y-4'>
                     <div className='flex items-center gap-2'>
-                      <span className='font-medium'>Teachers</span>
+                      <span className='font-medium'>Teacher: {teacher} </span>
                     </div>
+
                     <div className='flex items-center gap-2'>
                       <BookOpen className='h-4 w-4 text-muted-foreground' />
                       <span>{name}</span>

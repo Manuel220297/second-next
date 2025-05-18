@@ -23,7 +23,9 @@ const LearnPage = async ({ params }: { params: { id: string } }) => {
 
   const labels = user?.label || [];
   const isSuperUser = labels.includes('superuser');
-  const isMatch = subject[0].teachers.some((teacher: any) => (Array.isArray(teacher.userId) ? teacher.userId.includes(user?.id) : teacher.userId === user?.id));
+  // const isMatch = subject[0].teachers.some((teacher: any) => (Array.isArray(teacher.userId) ? teacher.userId.includes(user?.id) : teacher.userId === user?.id));
+  const isMatch = subject[0].teachers.userId == user?.id;
+  console.log('🐰🐰', isMatch);
 
   return <LearnMaterialsClient userId={user!.id} subjectId={id} canPost={isMatch || isSuperUser} />;
 };

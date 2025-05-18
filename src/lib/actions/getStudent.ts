@@ -1,6 +1,7 @@
 import { ID, Query, Models } from 'node-appwrite';
 import { createAdminClient } from '../server/appwrite';
 import { Grade } from './getGrades';
+import { Teacher } from './getTeacher';
 
 export interface Student extends Models.Document {
   userId?: string;

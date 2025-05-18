@@ -1,13 +1,21 @@
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+'use client';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import { Subject } from '@/lib/actions/getSubjects';
 import { Teacher } from '@/lib/actions/getTeacher';
 import Link from 'next/link';
 import React from 'react';
 
 const SidebarContentTeacher = ({ teacher }: any) => {
+  const { state } = useSidebar();
+  const isExpanded = state === 'expanded';
+
+  if (!isExpanded) {
+    return <></>;
+  }
+
   return (
     <SidebarMenu>
-      <SidebarMenuItem className='hidden'>
+      <SidebarMenuItem className=''>
         {teacher[0]?.subjects?.map((subjects: Subject, subjectsIndex: React.Key | null | undefined) => {
           function formatTime(timeString: string | null): string {
             if (!timeString) return '';
@@ -22,11 +30,13 @@ const SidebarContentTeacher = ({ teacher }: any) => {
             });
           }
 
+          console.log('Name ', subjects.name);
+
           const formattedScheduleStart = formatTime(subjects?.scheduleStart!);
           const formattedScheduleEnd = formatTime(subjects?.scheduleEnd!);
           const schedule = `${formattedScheduleStart} - ${formattedScheduleEnd}`;
           return (
-            <SidebarMenuButton className='hidden' key={subjectsIndex} asChild>
+            <SidebarMenuButton className='overflow-visible' key={subjectsIndex} asChild>
               <Link className='my-4' href={`/subjects/${subjects?.id}`}>
                 <div className='flex flex-col'>
                   <div>{subjects?.name}</div>

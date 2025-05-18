@@ -9,6 +9,8 @@ export interface AccountFormData {
   email: string;
   location: string;
   phone: string;
+  gradeLevel: string;
+  course: string;
 }
 
 function generateCustomId(firstName: string, lastName: string) {
@@ -35,6 +37,8 @@ export async function createStudentAccount(data: AccountFormData) {
         email: data.email,
         location: data.location,
         phone: data.phone,
+        gradeLevel: data.gradeLevel,
+        course: data.course,
       }
     );
 

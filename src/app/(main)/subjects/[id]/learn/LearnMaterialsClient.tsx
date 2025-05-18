@@ -13,6 +13,8 @@ type Props = {
 export default function LearnMaterialsClient({ userId, subjectId, canPost }: Props) {
   const { materials, isLoading, mutate } = useLearningMaterials(subjectId);
 
+  console.log('🤦‍♂️', materials);
+
   return (
     <div className='container mx-auto py-10'>
       <h1 className='text-3xl font-bold mb-6'>Materials</h1>

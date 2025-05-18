@@ -1,6 +1,7 @@
 import { ID, Query, Models } from 'node-appwrite';
 import { createAdminClient } from '../server/appwrite';
 import { Student } from './getStudent';
+import { Teacher } from './getTeacher';
 
 export interface Subject extends Models.Document {
   name: string;
@@ -8,6 +9,8 @@ export interface Subject extends Models.Document {
   scheduleStart?: string;
   scheduleEnd?: string;
   scheduleDay?: string;
+  teachers: Teacher;
+  room?: string;
 }
 export default async function getSubjects(id: string): Promise<Models.DocumentList<Subject>> {
   const { databases } = await createAdminClient();

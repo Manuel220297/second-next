@@ -8,7 +8,6 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 
-// Define the form schema with zod
 const formSchema = z
   .object({
     name: z.string().min(2, {
@@ -30,7 +29,6 @@ const formSchema = z
 type FormValues = z.infer<typeof formSchema>;
 
 export default function RegistrationForm() {
-  // Initialize react-hook-form with zod validation
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,7 +39,6 @@ export default function RegistrationForm() {
     },
   });
 
-  // Form submission handler
   const router = useRouter();
   async function onSubmit(values: FormValues) {
     const res = await fetch('/api/signup', {

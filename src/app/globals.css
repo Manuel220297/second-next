@@ -128,6 +128,23 @@ html body[data-scroll-locked] {
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+@media (max-width: 639px) {
+  .tweet-test .react-tweet-theme {
+    --tweet-body-font-size: 1rem;
+    --tweet-header-font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tweet-header-module__eMp9Yq__authorLinkText {
+    display: inline-block;
+    width: 20ch; /* Approximate width of 10 characters */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Show ... */
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

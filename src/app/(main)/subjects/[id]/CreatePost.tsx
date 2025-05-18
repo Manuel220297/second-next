@@ -42,6 +42,8 @@ export default function CreatePost({ authorId, subjectId, onPostSuccess }: Props
       body: JSON.stringify({ ...values, authorId, subjectId }),
     });
 
+    console.log(await res.json());
+
     if (res.ok) {
       onPostSuccess?.(); // ⬅️ Trigger re-fetch
       form.reset();

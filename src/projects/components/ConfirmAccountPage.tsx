@@ -28,7 +28,6 @@ const baseFormSchema = {
   phone: z.string().refine(isValidPhoneNumber, { message: 'Invalid phone number' }),
 };
 
-// Additional fields for teacher
 const teacherFormSchema = z.object({
   ...baseFormSchema,
   specialization: z.string().min(2, { message: 'Specialization must be at least 2 characters.' }),
@@ -38,9 +37,56 @@ const teacherFormSchema = z.object({
   }),
 });
 
-// Student form schema remains the same as the base
 const studentFormSchema = z.object({
   ...baseFormSchema,
+  gradeLevel: z.enum(
+    [
+      'Kindergarten',
+      'Preschool',
+      'Elemenary-1',
+      'Elemenary-2',
+      'Elemenary-3',
+      'Elemenary-4',
+      'Elemenary-5',
+      'Elemenary-6',
+      'JuniorHigh-1',
+      'JuniorHigh-2',
+      'JuniorHigh-3',
+      'JuniorHigh-4',
+      'SeniorHigh-1',
+      'SeniorHigh-2',
+      'Assiociate-1',
+      'Assiociate-2',
+      'Bachelor-1',
+      'Bachelor-2',
+      'Bachelor-3',
+      'Bachelor-4',
+    ],
+    {
+      required_error: 'Grade level is required.',
+    }
+  ),
+  course: z.enum(
+    [
+      'accountancy',
+      'business_administration',
+      'entrepreneurship',
+      'tourism_management',
+      'hospitality_management',
+      'criminology',
+      'computer_engineering',
+      'computer_science',
+      'information_technology',
+      'information_system',
+      'education_english',
+      'education_math',
+      'education_social_science',
+      'hotel_and_restaurant_management',
+    ],
+    {
+      required_error: 'Course is required.',
+    }
+  ),
 });
 
 type StudentFormValues = z.infer<typeof studentFormSchema>;
@@ -59,6 +105,8 @@ export function ConfirmAccountPage({ defaultValues, userId, email }: { defaultVa
       email: email || '',
       location: defaultValues?.location || '',
       phone: defaultValues?.phone || '',
+      gradeLevel: undefined,
+      course: undefined,
     },
   });
 
@@ -186,6 +234,85 @@ export function ConfirmAccountPage({ defaultValues, userId, email }: { defaultVa
                       <FormLabel className='font-medium'>Phone Number</FormLabel>
                       <FormControl>
                         <PhoneInput defaultCountry='PH' placeholder='Ex. 0919 469 5949' className='w-full' {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={studentForm.control}
+                  name='gradeLevel'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='font-medium'>Grade Level</FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <SelectTrigger>
+                            <SelectValue placeholder='Select grade level' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value='Kindergarten'>Kindergarten</SelectItem>
+                            <SelectItem value='Preschool'>Preschool</SelectItem>
+                            <SelectItem value='Elementary-1'>Elementary-1</SelectItem>
+                            <SelectItem value='Elementary-2'>Elementary-2</SelectItem>
+                            <SelectItem value='Elementary-3'>Elementary-3</SelectItem>
+                            <SelectItem value='Elementary-4'>Elementary-4</SelectItem>
+                            <SelectItem value='Elementary-5'>Elementary-5</SelectItem>
+                            <SelectItem value='Elementary-6'>Elementary-6</SelectItem>
+                            <SelectItem value='JuniorHigh-1'>JuniorHigh-1</SelectItem>
+                            <SelectItem value='JuniorHigh-2'>JuniorHigh-2</SelectItem>
+                            <SelectItem value='JuniorHigh-3'>JuniorHigh-3</SelectItem>
+                            <SelectItem value='JuniorHigh-4'>JuniorHigh-4</SelectItem>
+                            <SelectItem value='SeniorHigh-1'>SeniorHigh-1</SelectItem>
+                            <SelectItem value='SeniorHigh-2'>SeniorHigh-2</SelectItem>
+                            <SelectItem value='Assiociate-1'>Assiociate-1</SelectItem>
+                            <SelectItem value='Assiociate-2'>Assiociate-2</SelectItem>
+                            <SelectItem value='Bachelor-1'>Bachelor-1</SelectItem>
+                            <SelectItem value='Bachelor-2'>Bachelor-2</SelectItem>
+                            <SelectItem value='Bachelor-3'>Bachelor-3</SelectItem>
+                            <SelectItem value='Bachelor-4'>Bachelor-4</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={studentForm.control}
+                  name='course'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='font-medium'>Course</FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <SelectTrigger>
+                            <SelectValue placeholder='Select course' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[
+                              'accountancy',
+                              'business_administration',
+                              'entrepreneurship',
+                              'tourism_management',
+                              'hospitality_management',
+                              'criminology',
+                              'computer_engineering',
+                              'computer_science',
+                              'information_technology',
+                              'information_system',
+                              'education_english',
+                              'education_math',
+                              'education_social_science',
+                              'hotel_and_restaurant_management',
+                            ].map((course) => (
+                              <SelectItem key={course} value={course}>
+                                {course.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

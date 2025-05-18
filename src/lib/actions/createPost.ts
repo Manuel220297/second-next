@@ -39,8 +39,8 @@ export async function createPost(data: Material) {
         pdfile: data.pdfile,
       }
     );
-    console.log(data);
-    revalidatePath(`/subjects/${data.subjectId}/learn`, 'page');
+    console.log('🛡🛡', data);
+    // revalidatePath(`/subjects/${data.subjectId}/learn`, 'page');
     return { success: true, result };
   } catch (error: any) {
     console.error('[Appwrite] Document creation failed:', error);
