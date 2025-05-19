@@ -11,31 +11,34 @@ export default async function TodaySchedule() {
 
   if (!user?.id) return <>You are not login</>;
   const { documents: student } = await getStudent(user?.id);
-  console.log('🔴: ', student[0].grades);
+  // console.log('🔴: ', student[0].grades?.[0].subjects);
   const subjects = await getSubjectLists();
 
-  const schedule = subjects;
+  const schedule = student[0].grades;
+
+  if (student[0].grades?.length! <= 0) {
+    return <></>;
+  }
 
   return (
     <div className='space-y-4'>
-      {schedule.map((session) => {
-        const isCurrent = isNowBetween(session.scheduleStart!, session.scheduleEnd!);
+      {schedule?.map((session) => {
+        const isCurrent = isNowBetween(session.subjects.scheduleStart!, session.subjects.scheduleEnd!);
         console.log('asd', isCurrent);
         return (
-          <div key={session.id} className='flex flex-col gap-1 rounded-lg border p-3 text-sm'>
+          <div key={session.subjects.id} className='flex flex-col gap-1 rounded-lg border p-3 text-sm'>
             <div className='flex items-center justify-between'>
-              <div className='font-medium'>{session.name}</div>
+              <div className='font-medium'>{session.subjects.name}</div>
               <div className='flex items-center text-muted-foreground'>
                 <Clock className='mr-1 h-3 w-3' />
                 <span>
-                  {session.scheduleStart} - {session.scheduleEnd}
+                  {session.subjects.scheduleStart} - {session.subjects.scheduleEnd}
                 </span>
               </div>
             </div>
 
             <div className='flex items-center justify-between text-xs'>
-              <div className='text-muted-foreground'>{`${session.teachers.first_name} ${session.teachers.last_name}` || 'None'}</div>
-              <div className='text-muted-foreground'>{session.room || 'Labas'}</div>
+              <div className='text-muted-foreground'>{session.subjects.room || 'Labas'}</div>
             </div>
 
             {isCurrent && <div className='mt-1 text-xs font-medium text-primary'>Current Class</div>}

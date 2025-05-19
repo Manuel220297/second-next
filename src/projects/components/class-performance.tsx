@@ -12,38 +12,38 @@ interface ClassPerformanceData {
 export default function ClassPerformanceT() {
   // Mock data for class performance
   const classData: ClassPerformanceData[] = [
-    {
-      id: 1,
-      className: 'English Literature',
-      grade: '9th Grade',
-      averageScore: 82,
-      submissionRate: 94,
-      studentsCount: 26,
-    },
-    {
-      id: 2,
-      className: 'English Literature',
-      grade: '10th Grade',
-      averageScore: 78,
-      submissionRate: 88,
-      studentsCount: 24,
-    },
-    {
-      id: 3,
-      className: 'English Literature',
-      grade: '11th Grade',
-      averageScore: 85,
-      submissionRate: 92,
-      studentsCount: 22,
-    },
-    {
-      id: 4,
-      className: 'Creative Writing',
-      grade: '12th Grade',
-      averageScore: 91,
-      submissionRate: 97,
-      studentsCount: 18,
-    },
+    // {
+    //   id: 1,
+    //   className: 'English Literature',
+    //   grade: '9th Grade',
+    //   averageScore: 82,
+    //   submissionRate: 94,
+    //   studentsCount: 26,
+    // },
+    // {
+    //   id: 2,
+    //   className: 'English Literature',
+    //   grade: '10th Grade',
+    //   averageScore: 78,
+    //   submissionRate: 88,
+    //   studentsCount: 24,
+    // },
+    // {
+    //   id: 3,
+    //   className: 'English Literature',
+    //   grade: '11th Grade',
+    //   averageScore: 85,
+    //   submissionRate: 92,
+    //   studentsCount: 22,
+    // },
+    // {
+    //   id: 4,
+    //   className: 'Creative Writing',
+    //   grade: '12th Grade',
+    //   averageScore: 91,
+    //   submissionRate: 97,
+    //   studentsCount: 18,
+    // },
   ];
 
   const getScoreColor = (score: number) => {

@@ -13,42 +13,42 @@ interface AttendanceData {
 export default function AttendanceOverviewT() {
   // Mock data for attendance
   const attendanceData: AttendanceData[] = [
-    {
-      id: 1,
-      className: 'English Literature',
-      grade: '9th Grade',
-      present: 24,
-      absent: 1,
-      late: 1,
-      total: 26,
-    },
-    {
-      id: 2,
-      className: 'English Literature',
-      grade: '10th Grade',
-      present: 22,
-      absent: 2,
-      late: 0,
-      total: 24,
-    },
-    {
-      id: 3,
-      className: 'English Literature',
-      grade: '11th Grade',
-      present: 20,
-      absent: 0,
-      late: 2,
-      total: 22,
-    },
-    {
-      id: 4,
-      className: 'Creative Writing',
-      grade: '12th Grade',
-      present: 17,
-      absent: 1,
-      late: 0,
-      total: 18,
-    },
+    // {
+    //   id: 1,
+    //   className: 'English Literature',
+    //   grade: '9th Grade',
+    //   present: 24,
+    //   absent: 1,
+    //   late: 1,
+    //   total: 26,
+    // },
+    // {
+    //   id: 2,
+    //   className: 'English Literature',
+    //   grade: '10th Grade',
+    //   present: 22,
+    //   absent: 2,
+    //   late: 0,
+    //   total: 24,
+    // },
+    // {
+    //   id: 3,
+    //   className: 'English Literature',
+    //   grade: '11th Grade',
+    //   present: 20,
+    //   absent: 0,
+    //   late: 2,
+    //   total: 22,
+    // },
+    // {
+    //   id: 4,
+    //   className: 'Creative Writing',
+    //   grade: '12th Grade',
+    //   present: 17,
+    //   absent: 1,
+    //   late: 0,
+    //   total: 18,
+    // },
   ];
 
   return (

@@ -34,26 +34,6 @@ const items = [
     url: '#',
     icon: Home,
   },
-  {
-    title: 'Inbox',
-    url: '#',
-    icon: Inbox,
-  },
-  {
-    title: 'Calendar',
-    url: '#',
-    icon: Calendar,
-  },
-  {
-    title: 'Search',
-    url: '#',
-    icon: Search,
-  },
-  {
-    title: 'Settings',
-    url: '#',
-    icon: Settings,
-  },
 ];
 const SidebarContent1 = async () => {
   const { user } = await getLoggedInUser();
@@ -67,7 +47,7 @@ const SidebarContent1 = async () => {
     return (
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Sidebar</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -99,7 +79,7 @@ const SidebarContent1 = async () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
-                      <Link href={'/'}>
+                      <Link href={'/subjects/create'}>
                         <Plus></Plus>
                         Add subject
                       </Link>
@@ -149,9 +129,9 @@ const SidebarContent1 = async () => {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <Link href={'/'}>
+                    <Link href={'/subjects/join'}>
                       <Plus></Plus>
-                      Add subject
+                      Join subjects
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

@@ -16,7 +16,6 @@ export default function AppStudentPage() {
             <CardHeader className='flex flex-row items-center space-y-0'>
               <div className='flex flex-1 flex-col'>
                 <CardTitle>Today's Schedule</CardTitle>
-                <CardDescription>Your classes for today</CardDescription>
               </div>
               <CalendarClock className='h-5 w-5 text-muted-foreground' />
             </CardHeader>
@@ -29,7 +28,6 @@ export default function AppStudentPage() {
             <CardHeader className='flex flex-row items-center space-y-0'>
               <div className='flex flex-1 flex-col'>
                 <CardTitle>Upcoming Assignments</CardTitle>
-                <CardDescription>Tasks due soon</CardDescription>
               </div>
               <ScrollText className='h-5 w-5 text-muted-foreground' />
             </CardHeader>
@@ -43,7 +41,6 @@ export default function AppStudentPage() {
           <CardHeader className='flex flex-row items-center space-y-0'>
             <div className='flex flex-1 flex-col'>
               <CardTitle>Grades Overview</CardTitle>
-              <CardDescription>Your current academic performance</CardDescription>
             </div>
             <GraduationCap className='h-5 w-5 text-muted-foreground' />
           </CardHeader>

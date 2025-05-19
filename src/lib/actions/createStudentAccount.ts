@@ -29,7 +29,7 @@ export async function createStudentAccount(data: AccountFormData) {
     const result = await databases.createDocument(
       process.env.NEXT_PUBLIC_APPWRITE_DATABASE, //  Appwrite DB ID
       process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_STUDENTS, //  Collection ID
-      documentId, // Document ID (or use 'unique()' if you want Appwrite to generate it)
+      documentId,
       {
         userId: data.userId,
         first_name: data.first_name,

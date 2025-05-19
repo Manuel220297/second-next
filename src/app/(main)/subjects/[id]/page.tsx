@@ -31,7 +31,7 @@ const SubjectPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <AppSubjectPage name={subject[0].name} schedule={schedule} students={students} teacher={teacherFullName}></AppSubjectPage>
+      <AppSubjectPage name={subject[0].name} schedule={schedule} students={students} teacher={teacherFullName} id={id}></AppSubjectPage>
     </>
   );
 };

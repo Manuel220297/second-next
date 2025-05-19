@@ -12,40 +12,7 @@ interface Assignment {
 
 export default function UpcomingAssignments() {
   // Mock data for upcoming assignments
-  const assignments: Assignment[] = [
-    {
-      id: 1,
-      title: 'Research Paper',
-      subject: 'English Literature',
-      dueDate: 'Apr 10, 2025',
-      daysLeft: 2,
-      priority: 'high',
-    },
-    {
-      id: 2,
-      title: 'Problem Set 5',
-      subject: 'Mathematics',
-      dueDate: 'Apr 12, 2025',
-      daysLeft: 4,
-      priority: 'medium',
-    },
-    {
-      id: 3,
-      title: 'Lab Report',
-      subject: 'Physics',
-      dueDate: 'Apr 15, 2025',
-      daysLeft: 7,
-      priority: 'medium',
-    },
-    {
-      id: 4,
-      title: 'Group Project',
-      subject: 'Computer Science',
-      dueDate: 'Apr 20, 2025',
-      daysLeft: 12,
-      priority: 'low',
-    },
-  ];
+  const assignments: Assignment[] = [];
 
   const getPriorityColor = (priority: string, daysLeft: number) => {
     if (priority === 'high' || daysLeft <= 2) return 'destructive';

@@ -22,9 +22,10 @@ type Props = {
   schedule?: string;
   students?: Student[];
   teacher?: string;
+  id: string;
 };
 
-const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
+const AppSubjectPage = ({ name, schedule, students, teacher, id }: Props) => {
   const [activeTab, setActiveTab] = useState('posts');
 
   const NoReplyButton = () => null;
@@ -32,7 +33,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
   const announcements = [
     {
       id: 7,
-      author: 'Mr. Testing',
+      author: 'Maul Paul',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 11, 2025',
       contentDescription: '',
@@ -43,44 +44,43 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
           </div>
         </div>
       ),
-      comments: 0,
     },
-    {
-      id: 6,
-      author: 'Mr. Testing',
-      avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 11, 2025',
-      contentDescription: '',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
-            <video src='/videos/rikka_spin.webm' autoPlay loop></video>
-          </div>
-        </div>
-      ),
-      comments: 0,
-    },
-    {
-      id: 5,
-      author: 'Mr. Testing',
-      avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 11, 2025',
-      contentDescription: '',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
-            <FacebookEmbed url='https://www.facebook.com/rodrigo.leivapizarro/videos/666138999712308' width='100%' />
-          </div>
-        </div>
-      ),
-      comments: 0,
-    },
+    // {
+    //   id: 6,
+    //   author: 'Mr. Testing',
+    //   avatar: '/placeholder.svg?height=40&width=40',
+    //   date: 'May 11, 2025',
+    //   contentDescription: '',
+    //   content: (
+    //     <div className='w-full flex justify-start'>
+    //       <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
+    //         <video src='/videos/rikka_spin.webm' autoPlay loop></video>
+    //       </div>
+    //     </div>
+    //   ),
+    //   comments: 0,
+    // },
+    // {
+    //   id: 5,
+    //   author: 'Mr. Testing',
+    //   avatar: '/placeholder.svg?height=40&width=40',
+    //   date: 'May 11, 2025',
+    //   contentDescription: '',
+    //   content: (
+    //     <div className='w-full flex justify-start'>
+    //       <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
+    //         <FacebookEmbed url='https://www.facebook.com/rodrigo.leivapizarro/videos/666138999712308' width='100%' />
+    //       </div>
+    //     </div>
+    //   ),
+    //   comments: 0,
+    // },
     {
       id: 4,
       author: 'Mr. Testing',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 8, 2025',
-      contentDescription: 'May bagyo bukas',
+      contentDescription: 'Typhoon',
       content: (
         <div className='w-full flex justify-start'>
           <div className='w-full tweet-test'>
@@ -91,51 +91,51 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
       comments: 0,
     },
 
-    {
-      id: 3,
-      author: 'Mr. Testing',
-      avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 8, 2025',
-      contentDescription: '',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full tweet-test '>
-            <Tweet id='1915933848057114917' />
-          </div>
-        </div>
-      ),
-      comments: 0,
-    },
-    {
-      id: 2,
-      author: 'Mr. Testing lang',
-      avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 7, 2025',
-      contentDescription: '',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full tweet-test'>
-            <Tweet id='1919930168342176084' />
-          </div>
-        </div>
-      ),
-      comments: 0,
-    },
-    {
-      id: 1,
-      author: 'Mr. Testing lang',
-      avatar: '/placeholder.svg?height=40&width=40',
-      date: 'May 4, 2025',
-      contentDescription: '',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full tweet-test'>
-            <Tweet id='1917894680911712479' />
-          </div>
-        </div>
-      ),
-      comments: 0,
-    },
+    // {
+    //   id: 3,
+    //   author: 'Mr. Testing',
+    //   avatar: '/placeholder.svg?height=40&width=40',
+    //   date: 'May 8, 2025',
+    //   contentDescription: '',
+    //   content: (
+    //     <div className='w-full flex justify-start'>
+    //       <div className='w-full tweet-test '>
+    //         <Tweet id='1915933848057114917' />
+    //       </div>
+    //     </div>
+    //   ),
+    //   comments: 0,
+    // },
+    // {
+    //   id: 2,
+    //   author: 'Mr. Testing lang',
+    //   avatar: '/placeholder.svg?height=40&width=40',
+    //   date: 'May 7, 2025',
+    //   contentDescription: '',
+    //   content: (
+    //     <div className='w-full flex justify-start'>
+    //       <div className='w-full tweet-test'>
+    //         <Tweet id='1919930168342176084' />
+    //       </div>
+    //     </div>
+    //   ),
+    //   comments: 0,
+    // },
+    // {
+    //   id: 1,
+    //   author: 'Mr. Testing lang',
+    //   avatar: '/placeholder.svg?height=40&width=40',
+    //   date: 'May 4, 2025',
+    //   contentDescription: '',
+    //   content: (
+    //     <div className='w-full flex justify-start'>
+    //       <div className='w-full tweet-test'>
+    //         <Tweet id='1917894680911712479' />
+    //       </div>
+    //     </div>
+    //   ),
+    //   comments: 0,
+    // },
   ];
 
   const assignments = [
@@ -186,7 +186,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
             </Badge>
           </div>
           <div className='flex gap-2'>
-            <Link href={'/subjects/1-networking/learn'}>
+            <Link href={`/subjects/${id}/learn`}>
               <Button variant='outline' size='sm' className='cursor-pointer'>
                 <BookOpen className='mr-2 h-4 w-4' />
                 Materials
@@ -258,12 +258,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
                           </div>
                           <span className='text-lg'>{announcement.contentDescription}</span>
                           {announcement.content}
-                          <div className='mt-4 flex items-center gap-2'>
-                            <Button variant='ghost' size='sm'>
-                              <MessageSquare className='mr-2 h-4 w-4' />
-                              {announcement.comments} comments
-                            </Button>
-                          </div>
+                          <div className='mt-4 flex items-center gap-2'></div>
                         </div>
                       </div>
                     </div>
@@ -306,7 +301,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
               </Card>
             </TabsContent>
 
-            {/* <TabsContent value='students' className='space-y-6'>
+            <TabsContent value='people' className='space-y-6'>
               <Card>
                 <CardHeader className='flex flex-row items-center justify-between'>
                   <CardTitle>Students</CardTitle>
@@ -334,7 +329,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
                   )}
                 </CardContent>
               </Card>
-            </TabsContent> */}
+            </TabsContent>
 
             <TabsContent value='grades' className='space-y-6'>
               <Card>
@@ -375,27 +370,6 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
           {/* Sidebar - only show on posts and classwork tabs */}
           {(activeTab === 'posts' || activeTab === 'classwork') && (
             <div className='md:col-span-1'>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Upcoming</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className='space-y-4'>
-                    {assignments.slice(0, 3).map((assignment) => (
-                      <div key={assignment.id} className='flex flex-col gap-1 border-b pb-3 last:border-0'>
-                        <h4 className='font-medium'>{assignment.title}</h4>
-                        <p className='text-sm text-muted-foreground'>Due {assignment.dueDate}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant='ghost' size='sm' className='w-full'>
-                    View all
-                  </Button>
-                </CardFooter>
-              </Card>
-
               <Card className='mt-6'>
                 <CardHeader>
                   <CardTitle>Class Details</CardTitle>
@@ -416,7 +390,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher }: Props) => {
                     </div>
                     <div className='flex items-center gap-2'>
                       <Users className='h-4 w-4 text-muted-foreground' />
-                      <span>? students</span>
+                      <span> {students?.length ?? 0} students</span>
                     </div>
                   </div>
                 </CardContent>

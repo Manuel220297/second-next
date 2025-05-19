@@ -56,9 +56,6 @@ export default function CreatePost({ authorId, subjectId, onPostSuccess }: Props
         <Card className='w-full max-w-2xl mx-auto bg-card'>
           <CardHeader className='flex flex-row items-center justify-between p-4 border-b'>
             <h2 className='text-xl font-semibold'>Create Learning Material</h2>
-            <Button type='button' variant='ghost' size='icon' className='rounded-full'>
-              <X className='h-5 w-5' />
-            </Button>
           </CardHeader>
 
           <CardContent className='p-4 space-y-4'>
@@ -94,6 +91,11 @@ export default function CreatePost({ authorId, subjectId, onPostSuccess }: Props
                     </FormItem>
                   )}
                 />
+                <Button type='button' className=''>
+                  <a href='https://catbox.moe/' target='_blank'>
+                    Upload here
+                  </a>
+                </Button>
 
                 <FormField
                   control={form.control}
