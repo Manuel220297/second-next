@@ -3,50 +3,133 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { X, Send } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Send } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { useRef } from 'react';
 
-const formSchema = z.object({
-  title: z.string().min(1, 'Title is required'),
-  content: z.string().min(1, 'Content is required'),
-  pdfile: z.string().url('Must be a valid URL'),
-});
+// Create a schema with conditional validation
+const formSchema = z
+  .object({
+    title: z.string().min(1, 'Title is required'),
+    content: z.string().min(1, 'Content is required'),
+    pdfType: z.enum(['file', 'url']),
+    pdfile: z.any().optional(),
+    pdfurl: z.string().optional(),
+  })
+  .superRefine((data, ctx) => {
+    // Validate based on the selected tab
+    if (data.pdfType === 'file') {
+      // Check if file is provided and is a PDF
+      if (!(data.pdfile instanceof FileList) || data.pdfile.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please upload a PDF file',
+          path: ['pdfile'],
+        });
+      } else if (data.pdfile[0].type !== 'application/pdf') {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'File must be a PDF',
+          path: ['pdfile'],
+        });
+      }
+    } else if (data.pdfType === 'url') {
+      // Check if URL is provided and valid
+      if (!data.pdfurl || data.pdfurl.trim() === '') {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please enter a URL',
+          path: ['pdfurl'],
+        });
+      } else if (!z.string().url().safeParse(data.pdfurl).success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Please enter a valid URL',
+          path: ['pdfurl'],
+        });
+      }
+    }
+  });
 
 type FormValues = z.infer<typeof formSchema>;
 
 type Props = {
   authorId: string;
   subjectId: string;
-  onPostSuccess?: () => void; // ⬅️ NEW PROP
+  onPostSuccess?: () => void;
 };
 
 export default function CreatePost({ authorId, subjectId, onPostSuccess }: Props) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [pdfType, setPdfType] = useState<'file' | 'url'>('file');
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
       content: '',
-      pdfile: '',
+      pdfType: 'file',
+      pdfile: undefined,
+      pdfurl: '',
     },
   });
 
   const onSubmit = async (values: FormValues) => {
-    const res = await fetch('/api/create_post', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...values, authorId, subjectId }),
-    });
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('content', values.content);
+    formData.append('authorId', authorId);
+    formData.append('subjectId', subjectId);
 
-    console.log(await res.json());
+    if (values.pdfType === 'url' && values.pdfurl) {
+      formData.append('pdfurl', values.pdfurl);
+    }
 
-    if (res.ok) {
-      onPostSuccess?.(); // ⬅️ Trigger re-fetch
-      form.reset();
+    if (values.pdfType === 'file' && values.pdfile && values.pdfile.length > 0) {
+      formData.append('pdfile', values.pdfile[0]);
+    }
+
+    try {
+      const res = await fetch('/api/create_post', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (res.ok) {
+        onPostSuccess?.();
+        form.reset();
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+  const handleTabChange = (value: 'file' | 'url') => {
+    setPdfType(value);
+    form.setValue('pdfType', value, { shouldValidate: true });
+
+    // Clear the other field when switching tabs
+    if (value === 'file') {
+      form.setValue('pdfurl', '');
+    } else {
+      form.setValue('pdfile', undefined);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
@@ -91,24 +174,51 @@ export default function CreatePost({ authorId, subjectId, onPostSuccess }: Props
                     </FormItem>
                   )}
                 />
-                <Button type='button' className=''>
-                  <a href='https://catbox.moe/' target='_blank'>
-                    Upload here
-                  </a>
-                </Button>
 
-                <FormField
-                  control={form.control}
-                  name='pdfile'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder='PDF Link' className='font-medium text-lg' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className='space-y-2'>
+                  <Tabs defaultValue='file' value={pdfType} onValueChange={(value) => handleTabChange(value as 'file' | 'url')} className='w-full'>
+                    <TabsList className='grid w-full grid-cols-2'>
+                      <TabsTrigger value='file'>Upload PDF</TabsTrigger>
+                      <TabsTrigger value='url'>PDF URL</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value='file' className='mt-4'>
+                      <FormField
+                        control={form.control}
+                        name='pdfile'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                type='file'
+                                accept='application/pdf'
+                                ref={(el) => {
+                                  field.ref(el);
+                                  fileInputRef.current = el;
+                                }}
+                                onChange={(e) => field.onChange(e.target.files)}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </TabsContent>
+                    <TabsContent value='url' className='mt-4'>
+                      <FormField
+                        control={form.control}
+                        name='pdfurl'
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input placeholder='PDF Link' {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </TabsContent>
+                  </Tabs>
+                </div>
               </div>
             </div>
           </CardContent>

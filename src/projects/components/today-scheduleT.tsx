@@ -19,41 +19,6 @@ export default async function TodayScheduleT() {
   if (!user?.id) return <>You are not login</>;
   const { documents: teacher } = await getTeacher(user?.id);
 
-  // const schedule: ClassSession[] = [
-  //   {
-  //     id: 1,
-  //     scheduleStart: '08:00 AM',
-  //     scheduleEnd: '09:30 AM',
-  //     subject: 'English Literature',
-  //     room: 'Room 118',
-  //     students: 24,
-  //   },
-  //   {
-  //     id: 2,
-  //     scheduleStart: '09:45 AM',
-  //     scheduleEnd: '11:15 AM',
-  //     subject: 'English Literature',
-  //     room: 'Room 118',
-  //     students: 22,
-  //   },
-  //   {
-  //     id: 3,
-  //     scheduleStart: '11:30 AM',
-  //     scheduleEnd: '01:00 PM',
-  //     subject: 'Creative Writing',
-  //     room: 'Room 120',
-  //     students: 18,
-  //   },
-  //   {
-  //     id: 4,
-  //     scheduleStart: '02:00 PM',
-  //     scheduleEnd: '03:30 PM',
-  //     subject: 'English Literature',
-  //     room: 'Room 118',
-  //     students: 26,
-  //   },
-  // ];
-
   const schedule = teacher[0].subjects;
 
   return (
@@ -78,14 +43,6 @@ export default async function TodayScheduleT() {
               <span>{session.students.length} students</span>
             </div>
           </div>
-          {/* {session.isCurrent && (
-            <div className='mt-1 flex items-center justify-between'>
-              <div className='text-xs font-medium text-primary'>Current Class</div>
-              <Badge variant='outline' className='text-xs'>
-                In Progress
-              </Badge>
-            </div>
-          )} */}
         </div>
       ))}
     </div>

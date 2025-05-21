@@ -112,7 +112,6 @@ export default async function TransactionPage({ params }: { params: { id: string
 
           <div className='items-center mt-8'>
             <h2 className='text-lg font-medium'>Payment history</h2>
-            <h2 className='text-sm text-primary/75'>Testing lang, hindi ko pa nagagawa database dito</h2>
           </div>
 
           <Card>
@@ -125,66 +124,24 @@ export default async function TransactionPage({ params }: { params: { id: string
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell>08 Jan 2025</TableCell>
-                  <TableCell>
-                    <div>
-                      <div className='text-xs text-gray-500'>OR-FW187</div>
-                      <div>Cash</div>
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>300.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>08 Jan 2025</TableCell>
-                  <TableCell>
-                    <div>
-                      <div className='text-xs text-gray-500'>OR-90089</div>
-                      <div>Cash</div>
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>2,200.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>12 Feb 2025</TableCell>
-                  <TableCell>
-                    <div>
-                      <div className='text-xs text-gray-500'>OR-FW207</div>
-                      <div>Cash</div>
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>300.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>12 Feb 2025</TableCell>
-                  <TableCell>
-                    <div>
-                      <div className='text-xs text-gray-500'>OR-90284</div>
-                      <div>Cash</div>
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>1,370.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>21 Mar 2025</TableCell>
-                  <TableCell>
-                    <div>
-                      <div className='text-xs text-gray-500'>OR-90358</div>
-                      <div>Cash</div>
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>2,080.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>24 Apr 2025</TableCell>
-                  <TableCell>
-                    <div>
-                      <div className='text-xs text-gray-500'>OR-90589</div>
-                      <div>Cash</div>
-                    </div>
-                  </TableCell>
-                  <TableCell className='text-right'>2,090.00</TableCell>
-                </TableRow>
+                {student[0].transactions.map((tx: any, index: any) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {new Date(tx.date).toLocaleDateString('en-US', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
+                    </TableCell>
+                    <TableCell>
+                      <div>
+                        <div className='text-xs text-gray-500'>{tx.reference}</div>
+                        <div>{tx.method}</div>
+                      </div>
+                    </TableCell>
+                    <TableCell className='text-right'>{Number(tx.amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </Card>

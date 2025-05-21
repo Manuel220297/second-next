@@ -15,8 +15,6 @@ export default async function Home() {
   const { documents: teacher } = await getTeacher(user?.id!);
 
   const containsSuper = user?.label.includes('superuser');
-  console.log(user?.label[0]);
-  console.log(containsSuper);
 
   if (student.length > 0) {
     return (

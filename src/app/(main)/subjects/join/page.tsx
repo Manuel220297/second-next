@@ -7,6 +7,7 @@ import React from 'react';
 import { CreateGradesData } from '@/lib/actions/createGrades';
 import { Button } from '@/components/ui/button';
 import JoinSubjectButton from './JoinSubjectButton';
+import JoinSubjectForm from '@/projects/components/JoinSubjectForm';
 
 type Props = {};
 
@@ -14,14 +15,14 @@ const JoinPage = async ({}: Props) => {
   const subjects = await getSubjectLists();
   const { user } = await getLoggedInUser();
   const { documents: students } = await getStudent(user?.id!);
-  const data = {
-    students: students[0].$id,
-    subjects: subjects[0].$id,
-  };
+  // const data = {
+  //   students: students[0].$id,
+  //   subjects: subjects[0].$id,
+  // };
 
   return (
     <>
-      <ul>
+      {/* <ul>
         {subjects.map((subject) => {
           const data = {
             students: students[0].$id,
@@ -35,7 +36,10 @@ const JoinPage = async ({}: Props) => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
+      <div>
+        <JoinSubjectForm studentId={students[0].$id}></JoinSubjectForm>
+      </div>
     </>
   );
 };

@@ -14,34 +14,40 @@ export default async function TodaySchedule() {
   // console.log('🔴: ', student[0].grades?.[0].subjects);
   const subjects = await getSubjectLists();
 
-  const schedule = student[0].grades;
+  const schedule = student[0].subjects;
 
-  if (student[0].grades?.length! <= 0) {
+  if (student[0].subjects?.length! <= 0) {
     return <></>;
   }
+  const weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+  const isCurrentDay = weekday[new Date().getDay()] == schedule?.[0].scheduleDay;
 
   return (
     <div className='space-y-4'>
       {schedule?.map((session) => {
-        const isCurrent = isNowBetween(session.subjects.scheduleStart!, session.subjects.scheduleEnd!);
+        const isCurrent = isNowBetween(session.scheduleStart!, session.scheduleEnd!);
         console.log('asd', isCurrent);
         return (
-          <div key={session.subjects.id} className='flex flex-col gap-1 rounded-lg border p-3 text-sm'>
+          <div key={session.id} className='flex flex-col gap-1 rounded-lg border p-3 text-sm'>
             <div className='flex items-center justify-between'>
-              <div className='font-medium'>{session.subjects.name}</div>
+              <div className='font-medium'>{session.name}</div>
               <div className='flex items-center text-muted-foreground'>
-                <Clock className='mr-1 h-3 w-3' />
-                <span>
-                  {session.subjects.scheduleStart} - {session.subjects.scheduleEnd}
-                </span>
+                <div className='flex flex-col'>
+                  <span className='flex flex-row items-center align-middle'>
+                    <Clock className='mr-1 h-3 w-3' />
+                    {session.scheduleStart} - {session.scheduleEnd}
+                  </span>
+                  {session.scheduleDay}
+                </div>
               </div>
             </div>
 
             <div className='flex items-center justify-between text-xs'>
-              <div className='text-muted-foreground'>{session.subjects.room || 'Labas'}</div>
+              <div className='text-muted-foreground'>{session.room || 'Labas'}</div>
             </div>
 
-            {isCurrent && <div className='mt-1 text-xs font-medium text-primary'>Current Class</div>}
+            {isCurrentDay && isCurrent && <div className='mt-1 text-xs font-medium text-primary'>Current Class</div>}
           </div>
         );
       })}

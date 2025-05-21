@@ -2,6 +2,7 @@ import { ID, Query, Models } from 'node-appwrite';
 import { createAdminClient } from '../server/appwrite';
 import { Grade } from './getGrades';
 import { Teacher } from './getTeacher';
+import { Subject } from './getSubjects';
 
 export interface Student extends Models.Document {
   userId?: string;
@@ -16,9 +17,11 @@ export interface Student extends Models.Document {
   avatar?: string;
   wallpaper?: string;
   grades?: Grade[];
+  subjects?: Subject[];
   assessments?: {
     totalPayments: number;
     totalBalance: number;
+    $id: string;
   };
 }
 export default async function getStudent(userId: string): Promise<Models.DocumentList<Student>> {

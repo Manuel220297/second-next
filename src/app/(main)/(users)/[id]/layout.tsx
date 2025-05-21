@@ -24,8 +24,6 @@ export default async function UserLayout({ children, params }: { children: React
   const { id } = await params;
   const { user } = await getLoggedInUser();
 
-  // console.log('User ID:', user?.id);
-  // console.log('Web Id', id);
   const { documents: student } = await getStudent(id);
 
   let userType: 'student' | 'teacher' | 'unknown' = 'unknown';

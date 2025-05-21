@@ -16,34 +16,34 @@ import getSubjects from '@/lib/actions/getSubjects';
 import { MyTweet } from '@/components/my-tweet';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import AppAddStudent, { AddStudent } from '@/projects/components/AppAddStudent';
 
 type Props = {
   name: string;
+  allStudents: any;
   schedule?: string;
   students?: Student[];
   teacher?: string;
+  isTeacher: boolean;
   id: string;
 };
 
-const AppSubjectPage = ({ name, schedule, students, teacher, id }: Props) => {
+const AppSubjectPage = ({ name, schedule, students, allStudents, teacher, id, isTeacher }: Props) => {
   const [activeTab, setActiveTab] = useState('posts');
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const NoReplyButton = () => null;
 
   const announcements = [
     {
       id: 7,
-      author: 'Maul Paul',
+      author: 'Admin',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 11, 2025',
       contentDescription: '',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full max-w-sm sm:max-w-md md:max-w-xl'>
-            <FacebookEmbed url='https://www.facebook.com/photo?fbid=1005350581760610&set=a.498084749153865' width='100%' />,
-          </div>
-        </div>
-      ),
+      content: <FacebookEmbed url='https://www.facebook.com/photo?fbid=1005350581760610&set=a.498084749153865' width='100%' />,
+      comments: 0,
     },
     // {
     //   id: 6,
@@ -77,17 +77,12 @@ const AppSubjectPage = ({ name, schedule, students, teacher, id }: Props) => {
     // },
     {
       id: 4,
-      author: 'Mr. Testing',
+      author: 'Admin',
       avatar: '/placeholder.svg?height=40&width=40',
       date: 'May 8, 2025',
       contentDescription: 'Typhoon',
-      content: (
-        <div className='w-full flex justify-start'>
-          <div className='w-full tweet-test'>
-            <Tweet id='1920461757866504211' components={{}} />
-          </div>
-        </div>
-      ),
+      content: <Tweet id='1920461757866504211' components={{}} />,
+
       comments: 0,
     },
 
@@ -257,7 +252,9 @@ const AppSubjectPage = ({ name, schedule, students, teacher, id }: Props) => {
                             </DropdownMenu>
                           </div>
                           <span className='text-lg'>{announcement.contentDescription}</span>
-                          {announcement.content}
+                          <div className='w-full flex justify-start'>
+                            <div className='w-full tweet-test md:max-w-lg'>{announcement.content}</div>
+                          </div>
                           <div className='mt-4 flex items-center gap-2'></div>
                         </div>
                       </div>
@@ -307,6 +304,7 @@ const AppSubjectPage = ({ name, schedule, students, teacher, id }: Props) => {
                   <CardTitle>Students</CardTitle>
                   <Badge>{students?.length ?? 0}</Badge>
                 </CardHeader>
+
                 <CardContent>
                   {students && students.length > 0 ? (
                     students.map((s) => (
@@ -328,6 +326,24 @@ const AppSubjectPage = ({ name, schedule, students, teacher, id }: Props) => {
                     <p className='text-muted-foreground'>No students found.</p>
                   )}
                 </CardContent>
+                {isTeacher && (
+                  <CardFooter className='pt-0'>
+                    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                      <DialogTrigger asChild>
+                        <Button variant='outline' size='sm' className='w-full'>
+                          <PlusCircle className='h-4 w-4 mr-2' />
+                          Add student
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Add Student</DialogTitle>
+                        </DialogHeader>
+                        <AppAddStudent students={allStudents as AddStudent[]} documentId={id} />
+                      </DialogContent>
+                    </Dialog>
+                  </CardFooter>
+                )}
               </Card>
             </TabsContent>
 

@@ -1,22 +1,24 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import getStudent from '@/lib/actions/getStudent';
+import getStudentLists from '@/lib/actions/getStudentLists';
+import getSubjects from '@/lib/actions/getSubjects';
 import { getLoggedInUser } from '@/lib/server/appwrite';
+import AppAddStudent, { AddStudent } from '@/projects/components/AppAddStudent';
+import { PlusCircle } from 'lucide-react';
 import React from 'react';
 
 const TestingPage = async () => {
   const { user } = await getLoggedInUser();
+  const students = await getStudentLists();
 
   if (!user?.id) return <>You are not login</>;
-  const { documents: student } = await getStudent(user?.id);
 
-  console.log('Studenttt schedules from grades', student[0].grades?.[2].subjects?.scheduleDay);
   return (
-    <div>
-      <ul>
-        {student[0].grades?.map((grade: any, gradesIndex: React.Key | null | undefined) => {
-          return <li key={gradesIndex}> {grade.subjects.name} </li>;
-        })}
-      </ul>
-    </div>
+    <>
+      <AppAddStudent students={students as AddStudent[]} documentId={'1-networking'} />
+    </>
   );
 };
 

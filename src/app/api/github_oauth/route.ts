@@ -5,7 +5,7 @@ import { OAuthProvider } from 'node-appwrite';
 export async function GET(request: Request) {
   const { account } = await createAdminClient();
 
-  const redirectUrl = await account.createOAuth2Token(OAuthProvider.Github, `http://localhost:3000/oauth-callback`, `http://localhost:3000/signup`);
+  const redirectUrl = await account.createOAuth2Token(OAuthProvider.Github, `https://bd6v1hkx-3000.asse.devtunnels.ms/oauth-callback`, `https://bd6v1hkx-3000.asse.devtunnels.ms/signup`);
   const url = new URL(request.url);
 
   return NextResponse.redirect(redirectUrl);

@@ -5,8 +5,6 @@ import { redirect } from 'next/navigation';
 export default async function Testlogin() {
   const { isAuthenticated } = await getLoggedInUser();
 
-  console.log(isAuthenticated);
   if (!isAuthenticated) redirect('/login');
-  console.log(isAuthenticated);
   redirect('/dashboard');
 }

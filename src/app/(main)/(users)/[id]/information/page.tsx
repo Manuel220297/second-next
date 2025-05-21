@@ -23,7 +23,6 @@ const InformationPage = async ({ params }: Props) => {
       <h1>Course: {student[0].course || 'N/A'}</h1>
       <h1>Location: {student[0].location || 'N/A'}</h1>
       <h1>Phone: {student[0].phone || 'N/A'}</h1>
-      <h1>Payment status: {student[0].isPayed ? 'Paid' : 'Not paid'}</h1>
       <h1>Account creation date: {student[0].$createdAt || 'N/A'}</h1>
       <h1>Profile Icon: {student[0].avatar || 'N/A'}</h1>
       <h1>Profile Wallpaper: {student[0].wallpaper || 'N/A'}</h1>

@@ -11,7 +11,8 @@ export interface Material {
   title: string;
   content: string;
   subjects?: Subject;
-  pdfile?: string;
+  pdfile?: File | null;
+  pdfurl?: string;
 }
 
 function generateCustomId(title: string) {
@@ -21,10 +22,34 @@ function generateCustomId(title: string) {
 }
 
 export async function createPost(data: Material) {
-  const { databases } = await createAdminClient();
+  const { databases, storages } = await createAdminClient();
 
   try {
     const documentId = generateCustomId(data.title);
+
+    let pdfID: string;
+    pdfID = '';
+
+    const pdfile = data.pdfile;
+    console.log('🚀 ~ createPost ~ pdfile:', pdfile);
+
+    if (pdfile && pdfile.size > 0) {
+      try {
+        const response = await storages.createFile(process.env.NEXT_PUBLIC_APPWRITE_STORAGE_BUCKET_FILES, String(new Date().getTime()), pdfile);
+        console.log('🚀 ~ createPost ~ response:', response);
+        pdfID = response.$id;
+        if (!pdfID.includes('http://') && !pdfID.includes('https://')) {
+          pdfID = 'http://localhost/v1/storage/buckets/fileBucket/files/' + pdfID + '/view?project=6826ba610030df6a2362';
+        }
+      } catch (error) {
+        console.log('Error uploading pdf', error);
+        return {
+          error: 'Error uploading pdf' + error,
+        };
+      }
+    } else {
+      console.log('❌ No pdf file detected', pdfID, pdfile);
+    }
 
     const result = await databases.createDocument(
       process.env.NEXT_PUBLIC_APPWRITE_DATABASE, //  Appwrite DB ID
@@ -36,11 +61,12 @@ export async function createPost(data: Material) {
         title: data.title,
         content: data.content,
         subjects: data.subjectId,
-        pdfile: data.pdfile,
+        pdfile: pdfID || data.pdfurl,
       }
     );
-    console.log('🛡🛡', data);
-    // revalidatePath(`/subjects/${data.subjectId}/learn`, 'page');
+
+    revalidatePath(`/subjects/${data.subjectId}/learn`, 'layout');
+    console.log('💢', data);
     return { success: true, result };
   } catch (error: any) {
     console.error('[Appwrite] Document creation failed:', error);

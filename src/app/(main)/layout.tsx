@@ -66,7 +66,6 @@ export default async function RootLayout({
         <AppSidebar></AppSidebar>
         <main className='w-full'>
           <AppNavbar></AppNavbar>
-          <AutoBreadcrumb className='px-4 hidden md:block' />
 
           {children}
         </main>

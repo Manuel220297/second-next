@@ -5,12 +5,9 @@ import { getLoggedInUser } from './lib/server/appwrite';
 export async function middleware(request: NextRequest) {
   const { isAuthenticated, user } = await getLoggedInUser();
 
-  console.log('User Existing: ', user);
   if (!isAuthenticated) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
-  // console.log(user);
-  console.log('Middleware test');
 
   const pathname = request.nextUrl.pathname;
 

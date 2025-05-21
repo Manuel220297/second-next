@@ -10,7 +10,6 @@ const CreateSubjectPage = async () => {
   if (!teacher) {
     return <NotFoundPage />;
   }
-  console.log('🎶', teacher);
 
   return (
     <div>

@@ -47,7 +47,6 @@ const SidebarContent1 = async () => {
     return (
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Sidebar</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -97,7 +96,6 @@ const SidebarContent1 = async () => {
   return (
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {items.map((item) => (
